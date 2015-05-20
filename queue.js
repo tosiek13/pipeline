@@ -3,35 +3,38 @@ var queueC = document.getElementById("queue");
 
 var ctxQueue = queueC.getContext("2d");
 
-var BUFFER_SIZE = 5;
-
-
-queueC.width = BUFFER_SIZE * kPieceWidth;
-queueC.height = kPieceHeight;
-
-
-function fillBuffer(){
-	for(var i  = 0; i<BUFFER_SIZE; i++){
-		indexes[i] = getIndex();
-	}
-	printBuffer();
+function Queue(size){
+	this.size = size;					//ilość elementów w kolejce
+	this.width = size * kPieceWidth; 	//szerokość płótna
+	this.height = kPieceHeight; 		//wysokość płótna
+	this.array = new Array();
+	//Seting canvas
+	queueC.width = this.width;
+	queueC.height =this.height;
 }
 
-function getNextBlock(){
-	 nextIndex = indexes.shift();
-	 indexes.push(getIndex());
-	 printBuffer();
+Queue.prototype.fillBuffer = function(){
+	for(var i  = 0; i<this.size; i++){
+		this.array[i] = this.getIndex();
+	}
+	this.printBuffer();
+}
+
+Queue.prototype.getNextBlock = function(){
+	 nextIndex = this.array.shift();
+	 this.array.push(this.getIndex());
+	 this.printBuffer();
 
 	 return nextIndex;
 }
 
-function printBuffer(){
-	for(var i  = 0;i<BUFFER_SIZE; i++){
-		ctxQueue.drawImage(getNextImage(indexes[i]) , i * kPieceWidth, 0, kPieceWidth, kPieceHeight);
+Queue.prototype.printBuffer = function(){
+	for(var i  = 0;i<this.size; i++){
+		ctxQueue.drawImage(this.getNextImage(this.array[i]) , i * kPieceWidth, 0, kPieceWidth, kPieceHeight);
 	}
 }
 
-function getNextImage(code){ 
+Queue.prototype.getNextImage = function(code){ 
     switch(code){
         case 0:
             return straight;
@@ -42,6 +45,6 @@ function getNextImage(code){
     }
 }
 
-function getIndex(){
+Queue.prototype.getIndex = function(){
     return Math.floor((Math.random() * 3));
 }

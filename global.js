@@ -13,23 +13,9 @@ var kPixelWidth = 1 + (kBoardWidth * kPieceWidth);
 var kPixelHeight= 1 + (kBoardHeight * kPieceHeight);
 
 var boardPainter = new BoardPainter(ctx);
+var queue = new Queue(5);
 
 var fields = new Array();
-
-
-
-//images
-straight = new Image();
-straight.src = "straight.jpg";
-
-uband = new Image();
-uband.src = "uband.jpg";
-
-cross = new Image();
-cross.src = "cross.jpg";
-
-//indeksy z kolejki
-var indexes = new Array();
 
 
 /* Creating board */
@@ -61,5 +47,5 @@ function initGame(){
         }
     }
 
-    fillBuffer();
+    queue.fillBuffer();
 }
