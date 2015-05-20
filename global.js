@@ -14,6 +14,9 @@ var kPixelHeight= 1 + (kBoardHeight * kPieceHeight);
 
 var boardPainter = new BoardPainter(ctx);
 
+var fields = new Array();
+
+
 
 //images
 straight = new Image();

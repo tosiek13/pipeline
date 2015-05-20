@@ -46,8 +46,8 @@ function getField(e) {
         y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
     }
 
-    x -= c.offsetLeft;
-    y -= c.offsetTop;
+    x -= cBoard.offsetLeft;
+    y -= cBoard.offsetTop;
     x = Math.min(x, kBoardWidth * kPieceWidth);
     y = Math.min(y, kBoardHeight * kPieceHeight);
  
