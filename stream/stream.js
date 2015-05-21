@@ -1,7 +1,7 @@
 boardCanvas.addEventListener("click", paint);
 
 function paint(){
-    var stream = new Stream(200, 200, 225, 225, 'red', 7);
+    var stream = new Stream(10, 50, 25, 225, 'red', 7);
     stream.animate();
 }
 
@@ -33,7 +33,7 @@ Stream.prototype.changeField = function(){
     this.currentField = this.getNextField();
     this.countMove();
     this.updateCoordinates();
-    this.line = new Line(this.xBeg, this.yBeg, this.xEnd, this.yEnd, this.color, this.width);
+    this.line = new Line(this.xBeg, this.yBeg, this.xEnd - this.xBeg, this.yEnd - this.yBeg, this.color, this.width);
    // alert("xBeg = " + this.xBeg + " yBeg = " + this.yBeg + "xEnd = " + this.xEnd + " yEnd = " + this.yEnd );
 }
 
@@ -55,8 +55,8 @@ Stream.prototype.countMove = function(){
     code = 1;
     switch (code){
         case 1:
-            this.xMove = 50;
-            this.yMove = 50;
+            this.xMove = 20;
+            this.yMove = 20;
     }
 }
 
