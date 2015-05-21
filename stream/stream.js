@@ -1,7 +1,7 @@
 boardCanvas.addEventListener("click", paint);
 
 function paint(){
-    var stream = new Stream(100, 100, 100, -100, 'red', 7 );
+    var stream = new Stream(0, 0, 50, 50, 'red', 7);
     stream.animate();
 }
 
@@ -21,13 +21,13 @@ function Stream(xBeg, yBeg, xEnd, yEnd, color, width){
 
 Stream.prototype.animate = function(){
     var canvas = document.getElementById("board");
-    var line = new Line(this.xBeg, this.yBeg, this.xEnd, this.yEnd,this.color, this.width);
-    var animation = new Animation(canvas, line, 4000, 30, this);
+    var line = new Line(this.xBeg, this.yBeg, this.xEnd, this.yEnd, this.color, this.width);
+    var animation = new Animation(canvas, line, 2000, 30, this);
 }
 
 Stream.prototype.changeField = function(){
-    this.currentField = getNextField();
-    this.changeField();
+    this.currentField = this.getNextField();
+    this.countMove();
     this.updateCoordinates();
     this.animate();
 }
@@ -36,18 +36,18 @@ Stream.prototype.changeField = function(){
 Stream.prototype.updateCoordinates = function(){
     this.xBeg = this.xEnd;
     this.yBeg = this.yEnd;
-    this.xEnd = this.xBeg + xMove;
-    this.yEnd = this.yEnd + yMove;
+    this.xEnd = this.xBeg + this.xMove;
+    this.yEnd = this.yEnd + this.yMove;
 }
 
 /* Reads move according the code read from  */
-Stream.prototype.changeField = function(){
+Stream.prototype.countMove = function(){
     var code = this.currentField.code;
     code = 1;
     switch (code){
         case 1:
             this.xMove = 50;
-            this.yMove = 0;
+            this.yMove = 50;
     }
 }
 
