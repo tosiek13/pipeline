@@ -1,14 +1,23 @@
-function Queue(canvas, size){
-	this.canvas = canvas;
-	this.size = size;					//ilość elementów w kolejce
-	this.width = size * kPieceWidth; 	//szerokość płótna
-	this.height = kPieceHeight; 		//wysokość płótna
-	this.array = new Array();
-	//Seting canvas
-	canvas.width = this.width;
+/*
+* Object that represents Queue of avaiable block.
+*** @param canvas - plece where queue will be displayed
+*** @param size - length of queue (amount of elements)
+*
+* This object facilitates all necessary methods,
+* including printing himself.
+*/
+function Queue(canvas, size, fieldHeight, fieldWidth){
+	this.canvas = canvas;				
+	this.size = size;
+	this.width = size * fieldWidth; 	//szerokość płótna w px
+	this.height = fieldHeight; 		//wysokość płótna w px
+	this.array = new Array();			//Holds codes of blocks in queue
+	//Seting canvas size
+	canvas.width = this.width;			
 	canvas.height =this.height;
 }
 
+//Initialization method
 Queue.prototype.fillBuffer = function(){
 	for(var i  = 0; i<this.size; i++){
 		this.array[i] = this.getIndex();
@@ -16,6 +25,7 @@ Queue.prototype.fillBuffer = function(){
 	this.printBuffer();
 }
 
+/*Moves the queue forward end returns first element from queue*/
 Queue.prototype.getNextBlock = function(){
 	 nextIndex = this.array.shift();
 	 this.array.push(this.getIndex());
@@ -24,23 +34,15 @@ Queue.prototype.getNextBlock = function(){
 	 return nextIndex;
 }
 
+/*Prints current buffer content on canvas*/
 Queue.prototype.printBuffer = function(){
 	for(var i  = 0;i<this.size; i++){
-		this.canvas.getContext("2d").drawImage(this.getNextImage(this.array[i]) , i * kPieceWidth, 0, kPieceWidth, kPieceHeight);
+		var blockWidth = board.getFieldWidth();
+		this.canvas.getContext("2d").drawImage(getImage(this.array[i]) , i * blockWidth , 0, this.height, blockWidth);
 	}
 }
-
-Queue.prototype.getNextImage = function(code){ 
-    switch(code){
-        case 0:
-            return straight;
-        case 1:
-            return uband;
-        case 2:
-            return cross;
-    }
-}
-
+ 
+/*Returns random block (it's code reprezentation)*/
 Queue.prototype.getIndex = function(){
-    return Math.floor((Math.random() * 3));
+    return Math.floor((Math.random() * blocksAmount));
 }

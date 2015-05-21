@@ -1,7 +1,3 @@
-//Adding click listener - when user click on board.
-cBoard.addEventListener("click", clickHandler);
-
- 
 /* Funkcja obsługująca zdarzenia związane z kliknięciem na płótnie. */
 function clickHandler(e) {
     //Geting field that was clicked
@@ -16,8 +12,7 @@ function paintBlock(field) {
     if (true){//check weather the click was in tighr place.
         nextImage = queue.getNextBlock();
     }
-    //alert("Painting block" + field.y + " " + field.x);
-    ctx.drawImage(getImage(nextImage),field.x, field.y, kPieceWidth, kPieceHeight);
+    board.drawCurrentBlock(field);
 }
  
  /* gets the field, thatwas cliecked */
@@ -35,18 +30,11 @@ function getField(e) {
         y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
     }
 
-    x -= cBoard.offsetLeft;
-    y -= cBoard.offsetTop;
-    x = Math.min(x, kBoardWidth * kPieceWidth);
-    y = Math.min(y, kBoardHeight * kPieceHeight);
+    x -= boardCanvas.offsetLeft;
+    y -= boardCanvas.offsetTop;
+    x = Math.min(x, boardCanvas.width);
+    y = Math.min(y, boardCanvas.height);
  
     //alert("x = " + x + ", y = " + y);
-    return new Field(Math.floor(y/kPieceHeight), Math.floor(x/kPieceWidth));
-}
-
-function Field(y, x){
-    this.X = x;
-    this.Y = y;
-    this.x = x * kPieceWidth;
-    this.y = y * kPieceHeight;
+    return new Field(Math.floor(y/board.getFieldHeight()), Math.floor(x/board.getFieldWidth()));
 }
