@@ -52,6 +52,6 @@ function Animation(canvas, toAnimate, time_ms, fps, stream){
 }
 
 Animation.prototype.endPainting = function(obj) {
-    obj.stream.changeField();
+    //obj.stream.animate();
     clearInterval(obj.interClear);
 }

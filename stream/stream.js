@@ -1,7 +1,7 @@
 boardCanvas.addEventListener("click", paint);
 
 function paint(){
-    var stream = new Stream(0, 0, 50, 50, 'red', 7);
+    var stream = new Stream(200, 200, 225, 225, 'red', 7);
     stream.animate();
 }
 
@@ -15,21 +15,30 @@ function Stream(xBeg, yBeg, xEnd, yEnd, color, width){
     this.xMove;
     this.yMove;
 
+    this.canvas = document.getElementById("board");
+
     this.color = color;
     this.width = width;
+
+    this.line = new Line(this.xBeg, this.yBeg, this.xEnd - this.xBeg, this.yEnd - this.yBeg, this.color, this.width);
 }
 
 Stream.prototype.animate = function(){
-    var canvas = document.getElementById("board");
-    var line = new Line(this.xBeg, this.yBeg, this.xEnd, this.yEnd, this.color, this.width);
-    var animation = new Animation(canvas, line, 2000, 30, this);
+    setTimeout(nextAnimationCaller, 3000, this);
+    new Animation(this.canvas, this.line, 3000, 30, this);
+    this.changeField();
 }
 
 Stream.prototype.changeField = function(){
     this.currentField = this.getNextField();
     this.countMove();
     this.updateCoordinates();
-    this.animate();
+    this.line = new Line(this.xBeg, this.yBeg, this.xEnd, this.yEnd, this.color, this.width);
+   // alert("xBeg = " + this.xBeg + " yBeg = " + this.yBeg + "xEnd = " + this.xEnd + " yEnd = " + this.yEnd );
+}
+
+function nextAnimationCaller(stream){
+    stream.animate();
 }
 
 //Called After counting moves in both axes;
