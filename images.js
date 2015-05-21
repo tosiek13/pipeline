@@ -1,12 +1,12 @@
 //images
 straight = new Image();
-straight.src = "straight.jpg";
+straight.src = "images/straight.jpg";
 
 uband = new Image();
-uband.src = "uband.jpg";
+uband.src = "images/uband.jpg";
 
 cross = new Image();
-cross.src = "cross.jpg";
+cross.src = "images/cross.jpg";
 
 
 getImage = function(code){ 
