@@ -17,8 +17,7 @@ function paintBlock(field) {
         nextImage = queue.getNextBlock();
     }
     //alert("Painting block" + field.y + " " + field.x);
-    board.drawCurrentBlock(field);
-    //ctx.drawImage(getImage(nextImage),field.x, field.y, kPieceWidth, kPieceHeight);
+    ctx.drawImage(getImage(nextImage),field.x, field.y, kPieceWidth, kPieceHeight);
 }
  
  /* gets the field, thatwas cliecked */
@@ -43,4 +42,11 @@ function getField(e) {
  
     //alert("x = " + x + ", y = " + y);
     return new Field(Math.floor(y/kPieceHeight), Math.floor(x/kPieceWidth));
+}
+
+function Field(y, x){
+    this.X = x;
+    this.Y = y;
+    this.x = x * kPieceWidth;
+    this.y = y * kPieceHeight;
 }

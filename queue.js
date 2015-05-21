@@ -1,16 +1,12 @@
-//Identifying canvas element
-var queueC = document.getElementById("queue");
-
-var ctxQueue = queueC.getContext("2d");
-
-function Queue(size){
+function Queue(canvas, size){
+	this.canvas = canvas;
 	this.size = size;					//ilość elementów w kolejce
 	this.width = size * kPieceWidth; 	//szerokość płótna
 	this.height = kPieceHeight; 		//wysokość płótna
 	this.array = new Array();
 	//Seting canvas
-	queueC.width = this.width;
-	queueC.height =this.height;
+	canvas.width = this.width;
+	canvas.height =this.height;
 }
 
 Queue.prototype.fillBuffer = function(){
@@ -30,7 +26,7 @@ Queue.prototype.getNextBlock = function(){
 
 Queue.prototype.printBuffer = function(){
 	for(var i  = 0;i<this.size; i++){
-		ctxQueue.drawImage(this.getNextImage(this.array[i]) , i * kPieceWidth, 0, kPieceWidth, kPieceHeight);
+		this.canvas.getContext("2d").drawImage(this.getNextImage(this.array[i]) , i * kPieceWidth, 0, kPieceWidth, kPieceHeight);
 	}
 }
 
