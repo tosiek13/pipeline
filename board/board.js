@@ -14,21 +14,6 @@ Board.prototype.drawCurrentBlock = function(field) {
     this.canvas.getContext("2d").drawImage(getImage(nextImage), field.x + 0.5, field.y + 0.5, this.fieldWidth - 1, this.fieldHeight - 1);
 }
 
-/***
-* Object that represents field on board.
-** It holds information about it's posicion on canvas.
-** Value is a distance between left-top corner of canvas
-** and left-top of field.
-** Small letters (x, y) - pixel distance.
-** Big letters(X, Y) - field distance.
-***/
-function Field(Y, X){
-    this.X = X;
-    this.Y = Y;
-    this.x = X * board.getFieldWidth();
-    this.y = Y * board.getFieldHeight();
-}
-
 /*Creates Board and paints it*/
 Board.prototype.createBoard = function() {
 	/* Creating fields */
@@ -75,4 +60,26 @@ Board.prototype.getFieldHeight = function(){
 
 Board.prototype.getFieldWidth = function(){
 	return this.fieldWidth;
+}
+
+
+////////////// FIELD /////////////////////////
+/***
+* Object that represents field on board.
+** It holds information about it's posicion on canvas.
+** Value is a distance between left-top corner of canvas
+** and left-top of field.
+** Small letters (x, y) - pixel distance.
+** Big letters(X, Y) - field distance.
+***/
+function Field(Y, X){
+    this.X = X;
+    this.Y = Y;
+    this.x = X * board.getFieldWidth();
+    this.y = Y * board.getFieldHeight();
+    this.code;
+}
+
+Field.prototype.setCode = function(code){
+    this.code = code;
 }
