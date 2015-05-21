@@ -1,34 +1,49 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <div id ='timer'></div>
-        <canvas id="canvas"  width="361" height="361">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body onload="initGame()">
+        <canvas id="board"  width="600" height="450">
             Your browser does not support the HTML5 canvas tag.
         </canvas>
-        <canvas id="water"  width="361" height="361">
-        </canvas>
-        <script type="text/javascript" src="pipeline.js"></script>
-        <script>
-            initGame();     
-        </script>
+        <canvas id="queue" width="200" height="30"> </canvas>
+
+        <script type="text/javascript" src="global.js"></script>
+        <script type="text/javascript" src="board/board.js"></script>
+        <script type="text/javascript" src="board/images.js"></script>
+        <script type="text/javascript" src="board/queue.js"></script>
+        <script type="text/javascript" src="board/eventListener.js"></script>
+        <script type="text/javascript" src="main.js"></script>
  
         <!--CSS for tutorial-->
         <style type="text/css">
-            #canvas 
+            #board
             {
                 padding-left: 0;
                 padding-right: 0;
                 margin-left: auto;
                 margin-right: auto;
-                margin-top: 10%;
+                margin-top: 2%;
                 display: block;
-                width: 361px;
                 border:none;
                 background:#fff;
             }
+
+             #queue
+            {
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 1%;
+                display: block;
+                border:none;
+                background:#A0A0A0;
+            }
             body
             {
-                background:#3A539B;
+                background:#404040;
             }
         </style>      
     </body>
