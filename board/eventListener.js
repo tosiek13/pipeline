@@ -5,8 +5,22 @@ function clickHandler(e) {
      
     var nextBlockCode = queue.spyQueue();
     modifyConnections(field, nextBlockCode);
+
     //Paints the current block on specified field
     paintBlock(field);
+
+    var s = pipeGrid.getNeighbours(0, 0);
+    if (s[0] == null){
+        alert( "Left - top  neighbour not avaiable");
+    }else{
+        alert(" left - top: x = " + s[0].X + ", y = " + s[0].Y);
+    }
+
+    if (s[1] == null){
+        alert( "Right - bottom  neighbour not avaiable");
+    }else{
+        alert(" Right bottom: x = " + s[1].X + ", y = " + s[1].Y);
+    }
 }
  
  /* Paints the current block on specified field */

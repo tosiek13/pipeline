@@ -16,40 +16,40 @@ function modifyConnections(field, code){
 
 	switch(code){
 		case 2:
-			pipeGrid.nodes[x - 1][y][1] = new Node(x + 1, y)
+			pipeGrid.nodes[x - 1][y][1] = new Node(X + 1, Y)
 			pipeGrid.nodes[x][y][1] = null;
-			pipeGrid.nodes[x + 1][y][0] = new Node(x - 1, y);
+			pipeGrid.nodes[x + 1][y][0] = new Node(X - 1, Y);
 			pipeGrid.nodes[x][y + 1][0] = null;
 			break;
 		case 3:
 			pipeGrid.nodes[x - 1][y][1] = null
-			pipeGrid.nodes[x][y][1] = new Node(x, y + 1);
+			pipeGrid.nodes[x][y][1] = new Node(X, Y + 1);
 			pipeGrid.nodes[x + 1][y][0] = null;
-			pipeGrid.nodes[x][y + 1][0] = new Node(x, y - 1);
+			pipeGrid.nodes[x][y + 1][0] = new Node(X, Y - 1);
 			break;
 		case 4:
-			pipeGrid.nodes[x - 1][y][1] = new Node(x, y + 1);
+			pipeGrid.nodes[x - 1][y][1] = new Node(X, Y + 1);
 			pipeGrid.nodes[x][y][1] = null;
 			pipeGrid.nodes[x + 1][y][0] = null;
-			pipeGrid.nodes[x][y + 1][0] = new Node(x - 1, y);
+			pipeGrid.nodes[x][y + 1][0] = new Node(X - 1, Y);
 			break;
 		case 5:
-			pipeGrid.nodes[x - 1][y][1] = new Node(x, y - 1);
-			pipeGrid.nodes[x][y][1] = new Node(x - 1, y);
+			pipeGrid.nodes[x - 1][y][1] = new Node(X, Y - 1);
+			pipeGrid.nodes[x][y][1] = new Node(X - 1, Y);
 			pipeGrid.nodes[x + 1][y][0] = null;
 			pipeGrid.nodes[x][y + 1][0] = null;
 			break;
 		case 6:
 			pipeGrid.nodes[x - 1][y][1] = null;
-			pipeGrid.nodes[x][y][1] = new Node(x + 1, y);
-			pipeGrid.nodes[x + 1][y][0] = new Node(x, y - 1);
+			pipeGrid.nodes[x][y][1] = new Node(X + 1, Y);
+			pipeGrid.nodes[x + 1][y][0] = new Node(X, Y - 1);
 			pipeGrid.nodes[x][y + 1][0] = null;
 			break;
 		case 7:
 			pipeGrid.nodes[x - 1][y][1] = null;
 			pipeGrid.nodes[x][y][1] = null;
-			pipeGrid.nodes[x + 1][y][0] = new Node(x, y + 1);
-			pipeGrid.nodes[x][y + 1][0] = new Node(x + 1, y);
+			pipeGrid.nodes[x + 1][y][0] = new Node(X, Y + 1);
+			pipeGrid.nodes[x][y + 1][0] = new Node(X + 1, Y);
 			break;
 	}
 

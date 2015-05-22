@@ -23,7 +23,7 @@ function PipeGrid(canvas){
 PipeGrid.prototype.getNeighbours = function(X, Y){
     var position = this.arrayIndexesFromNodes(X, Y);
 
-    return nodes[position.X][position.Y];
+    return this.nodes[position.X][position.Y];
 }
 
 /* Returns position in nodes array of node with coordinates X, Y */
