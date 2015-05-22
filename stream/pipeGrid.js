@@ -12,18 +12,11 @@ function PipeGrid(canvas){
 PipeGrid.prototype.createNodes = function(){
     for(var i = 0; i < this.cols; i++){
         this.nodes[i] = new Array();
-        if( i%2 == 0){
-            //var elements = Math.floor(this.rows / 2);
-            for(var j = 1; j<=this.rows; j+=2){
-                this.nodes[i][j] = new Array();
-                alert("y = " + i + "x = " + j); 
-            }
-        }else{
-            //var elements = Math.floor(this.rows / 2) + 1;
-            for(var j = 0; j<=this.rows; j+=2){
-                this.nodes[i][j] = new Array();
-                alert("y = " + i + "x = " + j); 
-            }
+        var j = (i + 1)%2;
+        //var elements = Math.floor(this.rows / 2);
+        for(j; j<this.rows; j+=2){
+            this.nodes[i][j] = new Array();
+            //alert("x = " + i + "y = " + j); 
         }
     }
 }

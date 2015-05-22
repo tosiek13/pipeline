@@ -1,6 +1,10 @@
 /* Creating board */
 function initGame(){
-    board = new Board(boardCanvas, 3, 4);
+	//Loading images
+    images = new Images();
+    images.load();
+	
+    board = new Board(boardCanvas, 4, 3);
     board.createBoard();
 
     //Queue building, holds next available blocks;

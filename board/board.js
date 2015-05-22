@@ -11,7 +11,7 @@ function Board(canvas, rows, cols){
 
 /*Drows current(first from queue clock) on element that was pass as param*/
 Board.prototype.drawCurrentBlock = function(field) {
-    this.canvas.getContext("2d").drawImage(getImage(nextImage), field.x + 0.5, field.y + 0.5, this.fieldWidth - 1, this.fieldHeight - 1);
+    this.canvas.getContext("2d").drawImage(images.getImage(nextImage), field.x + 0.5, field.y + 0.5, this.fieldWidth - 1, this.fieldHeight - 1);
 }
 
 /*Creates Board and paints it*/
