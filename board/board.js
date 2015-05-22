@@ -19,7 +19,15 @@ Board.prototype.createBoard = function() {
 	/* Creating fields */
 	this.createFields();
 
-	/*Cainting board*/
+    /* Paintinh help lines */
+    this.paintBoard();
+
+    //Adding click listener - when user click on boardBanvas.
+	this.canvas.addEventListener("click", clickHandler);
+}
+
+Board.prototype.paintBoard = function(){
+    /*Cainting board*/
     this.ctx = this.canvas.getContext("2d");
 
     this.ctx.beginPath();
@@ -38,9 +46,6 @@ Board.prototype.createBoard = function() {
     //Painting on canvas
     this.ctx.strokeStyle = "blue";
     this.ctx.stroke();
-
-    //Adding click listener - when user click on boardBanvas.
-	this.canvas.addEventListener("click", clickHandler);
 }
 
 Board.prototype.createFields = function(){
