@@ -1,6 +1,16 @@
+/***
+** This class represents the nodes on board.
+** Nodes are positions where stream may begin or finish his move 
+** through the field.
+**
+** You can get, accessable neighbour (max 2) getNeighgour(X, Y);
+** For adding there is no method, responisibility moved to pipeMenager
+** 
+***/
+
 function PipeGrid(canvas){
     this.canvas = canvas;
-    this.nodes = new Array();
+    this.nodes;
     this.rows = board.rows * 2 + 1;
     this.cols = board.cols * 2 + 1;
     this.fieldWidth = board.getFieldWidth();
@@ -9,36 +19,80 @@ function PipeGrid(canvas){
     this.yStep = this.fieldHeight / 2;
 }
 
+/*Returns the array of nearest Nodes, that are avaiable (through existing path)*/
+PipeGrid.prototype.getNeighbours = function(X, Y){
+    var position = this.arrayIndexesFromNodes(X, Y);
+
+    return nodes[position.X][position.Y];
+}
+
+/* Returns position in nodes array of node with coordinates X, Y */
+PipeGrid.prototype.arrayIndexesFromNodes = function(X, Y){
+    return new Node(X, Math.floor(Y/2));
+}
+
+/*Creates Nodes, and array to every node, tha will hold info about paths*/
 PipeGrid.prototype.createNodes = function(){
+    this.nodes = new Array(this.cols);
     for(var i = 0; i < this.cols; i++){
-        this.nodes[i] = new Array();
-        var j = (i + 1)%2;
-        //var elements = Math.floor(this.rows / 2);
-        for(j; j<this.rows; j+=2){
-            this.nodes[i][j] = new Array();
+        var inColumn = board.rows;
+        if (i % 2 != 0){
+            inColumn++;
+        }else{}
+        this.nodes[i] = new Array(inColumn);
+
+        for(var j = 0; j < inColumn; j++){
+            this.nodes[i][j] = new Array(2);
             //alert("x = " + i + "y = " + j); 
         }
     }
 }
 
+/*Printing grid representation (dots in place of Nodes)*/
 PipeGrid.prototype.paint = function(){
-    /*Cainting board*/
     this.ctx = this.canvas.getContext("2d");
 
-    this.ctx.beginPath();
-    //vertical lines
-    for (var x = 0; x < (this.canvas.width - this.xStep); x += this.xStep){
-        this.ctx.moveTo(0.5 + x, 0);
-        this.ctx.lineTo(0.5 + x, this.canvas.height);
+    for(var i = 0; i < this.nodes.length; i++){
+        for(var j = 0; j<this.nodes[i].length; j++){
+            //alert("x(i) = " + i + " y(j) = " + j);
+            var node = this.toPixels(i, j);
+            this.printDot(this.ctx, node.X, node.Y);
+        }
     }
-     
-    //horizontal lines
-    for (var y = 0; y < (this.canvas.height - this.yStep); y += this.yStep) {
-        this.ctx.moveTo(0, 0.5 + y);
-        this.ctx.lineTo(this.canvas.width + 1, 0.5 +  y);
+}
+
+
+PipeGrid.prototype.printDot = function(ctx, x, y){
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, 2 * Math.PI, false);
+    ctx.fillStyle = 'red';
+    ctx.fill();
+    ctx.stroke();
+}
+
+/**Returns Node, that represents position of field center in canvas.
+* Warn ! Node that is returned is not part of the grid.
+***/
+PipeGrid.prototype.toNodeCoordinates = function(field){
+    return new Node( field.X * 2 + 1, field.Y * 2 + 1);
+}
+
+/*Returns the position in pixels of noded - parameter - indexes in nodes array*/
+PipeGrid.prototype.toPixels = function(i, j){
+    var y;
+    if( i%2 == 0){
+        y = (j + 0.5)* board.getFieldHeight();
+    }else{
+        y = j * board.getFieldHeight();
     }
- 
-    //Painting on canvas
-    this.ctx.strokeStyle = "black";
-    this.ctx.stroke();
+    var x = i * (0.5) * board.getFieldWidth()
+
+    return new Node(x, y);
+}
+
+
+/*Przelicza współrzędne pola na współrzędne gridu - czyli węzła*/
+function Node(X, Y){
+    this.X = X;
+    this.Y = Y;
 }

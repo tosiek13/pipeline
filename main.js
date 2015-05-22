@@ -3,7 +3,8 @@ function initGame(){
 	//Loading images
     images = new Images();
     images.load();
-	
+
+
     board = new Board(boardCanvas, 4, 3);
     board.createBoard();
 
@@ -12,6 +13,9 @@ function initGame(){
     queue.fillBuffer();
 
     pipeGrid = new PipeGrid(boardCanvas);
-    pipeGrid.paint();
     pipeGrid.createNodes();
+    pipeGrid.paint();
+
+    /*var inA = pipeGrid.getNeighbours(1, 0);
+    alert("x = " + inA.X + " y = " + inA.Y);*/
 }

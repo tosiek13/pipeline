@@ -3,15 +3,15 @@ function clickHandler(e) {
     //Geting field that was clicked
     var field = getField(e);
      
+    var nextBlockCode = queue.spyQueue();
+    modifyConnections(field, nextBlockCode);
     //Paints the current block on specified field
     paintBlock(field);
 }
  
  /* Paints the current block on specified field */
 function paintBlock(field) {
-    if (true){//check weather the click was in tighr place.
-        nextImage = queue.getNextBlock();
-    }
+    nextImage = queue.getNextBlock();
     board.drawCurrentBlock(field);
 }
  

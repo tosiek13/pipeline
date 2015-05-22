@@ -34,6 +34,10 @@ Queue.prototype.getNextBlock = function(){
 	 return nextIndex;
 }
 
+Queue.prototype.spyQueue = function(){
+	return this.array[0];
+}
+
 /*Prints current buffer content on canvas*/
 Queue.prototype.printBuffer = function(){
 	for(var i  = 0;i<this.size; i++){
