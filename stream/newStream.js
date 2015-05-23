@@ -1,8 +1,11 @@
-function Stream(XBeg, YBeg, XEnd, YEnd, color, width){
+/*  */
+function Stream(XBeg, YBeg, XEnd, YEnd, XStop, YStop, color, width){
     this.XBeg = XBeg;
     this.YBeg = YBeg;
     this.XEnd = XEnd;
     this.YEnd = YEnd;
+    this.XStop = XStop;
+    this.YStop = YStop;
     this.color = color;
     this.width = width;
 
@@ -41,7 +44,7 @@ Stream.prototype.changeField = function(){
 }
 
 Stream.prototype.init = function(){
-   // alert("init");
+    //Creating Line from Beg to first Edge.
     var x = this.XBeg / 2 * board.getFieldWidth();
     var y = this.YBeg / 2 * board.getFieldHeight();
     var xDiff = (this.XEnd - this.XBeg) / 2 * board.getFieldWidth();

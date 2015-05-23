@@ -1,12 +1,13 @@
 /* Creating board */
 function initGame(){
     alert("init");
+
 	//Loading images
     images = new Images();
     images.load();
 
 
-    board = new Board(boardCanvas, 15, 20);
+    board = new Board(boardCanvas, boardHeight, boardWidth);
     board.createBoard();
 
     //Queue building, holds next available blocks;
@@ -17,7 +18,7 @@ function initGame(){
     pipeGrid.createNodes();
     //pipeGrid.paint();
 
-    initStream();
+    initStreams(1);
     //var arc = new Arc(4, 3, 3, 2, 4);
     //new Animation(boardCanvas, arc, 3000, 30, this);
 }
