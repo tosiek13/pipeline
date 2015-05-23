@@ -37,11 +37,11 @@ Stream.prototype.changeField = function(){
             }
         }
     }
-    alert("No neighbours found - you losed");
+    //alert("No neighbours found - you losed");
 }
 
 Stream.prototype.init = function(){
-    alert("init");
+   // alert("init");
     var x = this.XBeg / 2 * board.getFieldWidth();
     var y = this.YBeg / 2 * board.getFieldHeight();
     var xDiff = (this.XEnd - this.XBeg) / 2 * board.getFieldWidth();
@@ -61,10 +61,13 @@ Stream.prototype.cratePath = function(){
     alert("Path creating: xbeg" +  begCoor.X + " ybeg" + begCoor.Y + " xend = " + endCoor.X + " yend = " + endCoor.Y);
     //Linia prosta
     if(this.XBeg == this.XEnd || (this.YBeg == this.YEnd)){
+        alert("Line");
         this.path = new Line(begCoor.X, begCoor.Y, endCoor.X - begCoor.X, endCoor.Y - begCoor.Y, this.color, this.width);
+        return;
     }else{
-        alert("Arc not suported");
-        //this.path = new Arc();
+        alert("Arc");
+        this.path = new Arc(this.XBeg, this.YBeg, this.XEnd, this.YEnd);
+        return;
     }
     alert("EndGame - no neighbour");
 }

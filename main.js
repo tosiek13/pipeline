@@ -1,5 +1,6 @@
 /* Creating board */
 function initGame(){
+    alert("init");
 	//Loading images
     images = new Images();
     images.load();
@@ -16,7 +17,18 @@ function initGame(){
     pipeGrid.createNodes();
     pipeGrid.paint();
 
-    initStream();
+    //initStream();
+    var arc = new Arc(3, 4, 2, 5, 4);
+
+    ctx = boardCanvas.getContext("2d");
+    ctx.beginPath();
+        
+    ctx.arc(arc.xCenter, arc.yCenter, arc.radius, arc.angleBeg, arc.angleEnd);
+        //animator.ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = 'green';
+    ctx.stroke();
+
 
     /*var inA = pipeGrid.getNeighbours(1, 0);
     alert("x = " + inA.X + " y = " + inA.Y);*/
