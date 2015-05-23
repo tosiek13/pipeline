@@ -2,25 +2,33 @@
 function initStreams(amount){
 	streams = [];
 
+	//Coordinates of field - start/ends of streams.
 	var X = generateArrayWithUniqueValuesFromRange(0, boardHeight, 2 * amount);
 	var Y = generateArrayWithUniqueValuesFromRange(0, boardWidth, 2 * amount);
 
 	/* Creating streams one in iteration*/
 	for(var i = 0; i<2 * amount; i+=2){
 		alert("creating Stream");
-		var begDirection = generateDirectionCoordinates(X[i], Y[i]);
-		var endDirection = generateDirectionCoordinates(X[i+1], Y[i+1]);
-		var stream = new Stream(X[i], Y[i], begDirection[0], begDirection[1], endDirection[0], endDirection[1], colors[i], 4);
+		//alert("beg (FIELD):, X = " + X[i] + ", Y = " + Y[i]);
+
+		//Tworze węzeł (z centrum) i przeliczam go na współrzędne siatki.
+		var begField = new Node(X[i], Y[i]);
+		var begGrid = pipeGrid.toNodeCoordinates(begField);
+		//Ustalam kierunek.
+		var begDirection = generateDirectionCoordinates(begGrid);
+
+		var endGrid = pipeGrid.toNodeCoordinates(new Node(X[i+1], Y[i+1]));
+		var endDirection = generateDirectionCoordinates(endGrid);
+		var stream = new Stream(begGrid, begDirection[0], endDirection[0],'blue'/* colors[i]*/, fieldSize * 25/100);
 		streams.push(stream);
 		
 		//Setting board state
-		var begNode = new Node(X[i], Y[i])
-		modifyConnections(begNode, begDirection[2]);
-		board.drawBlock(begNode, begDirection[2]);
+		modifyConnections(begField, begDirection[1]);
+		board.drawBlock(begField, begDirection[1]);
 
 		var endNode = new Node(X[i+1], Y[i+1]);
-		modifyConnections(endNode, endDirection[2]);
-		board.drawBlock(begNode, begDirection[2]);
+		modifyConnections(endNode, endDirection[1]);
+		board.drawBlock(endNode, begDirection[1]);
 	}
 
 	/* Starting streams */
@@ -34,7 +42,10 @@ function initStreams(amount){
 * This function do it safety (not block the stream beg/end with wall)
 * returns Array [NextX, NextY, code] //code - kod elementu.
 **/
-function generateDirectionCoordinates(X, Y){
+function generateDirectionCoordinates(gridNode){
+	var X = gridNode.X;
+	var Y = gridNode.Y;
+
 	while(true){
 		var code = intFromRange(8, 12);
 		var nextX;
@@ -58,19 +69,19 @@ function generateDirectionCoordinates(X, Y){
 				break;
 		}
 		if ( !isInBorder(nextX, nextY))
-			return new Array(nextX, nextY, code);
+			return new Array(new Node(nextX, nextY), code);
 	}
 }
 
-/* Checks weather the node lay on boarder of board */
+/* Checks weather the node lay on boarder of board X, Y grid coordinates */
 function isInBorder(X, Y){
-	if( X < 0 || Y < 0 || X > boardHeight || Y > boardWidth)
+	if( X == 0 || Y == 0 || X > (2 * boardHeight) || Y > ( 2* boardWidth))
 		return true;
 	return false;
 }
 
 /* Generates unique integers from range [beg, end) */
-function generateArrayWithUniqueValuesFromRange(amount, beg, end){
+function generateArrayWithUniqueValuesFromRange(beg, end, amount){
 	if((beg - end) > amount){
 		alert("Cannot generate so meny unique integers from this range.");
 	}

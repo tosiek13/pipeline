@@ -18,7 +18,7 @@ function initGame(){
     pipeGrid.createNodes();
     //pipeGrid.paint();
 
-    initStreams(1);
+    initStreams(2);
     //var arc = new Arc(4, 3, 3, 2, 4);
     //new Animation(boardCanvas, arc, 3000, 30, this);
 }

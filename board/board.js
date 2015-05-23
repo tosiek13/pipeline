@@ -11,6 +11,7 @@ function Board(canvas, rows, cols){
 
 /*Drows current(first from queue clock) on element that was pass as param*/
 Board.prototype.drawBlock = function(field, imageCode) {
+    alert("Drowing field");
     this.canvas.getContext("2d").drawImage(images.getImage(imageCode), field.x + 0.5, field.y + 0.5, this.fieldWidth - 1, this.fieldHeight - 1);
 }
 
