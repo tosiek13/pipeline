@@ -16,6 +16,8 @@ function initGame(){
     pipeGrid.createNodes();
     pipeGrid.paint();
 
+    initStream();
+
     /*var inA = pipeGrid.getNeighbours(1, 0);
     alert("x = " + inA.X + " y = " + inA.Y);*/
 }

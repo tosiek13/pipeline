@@ -90,6 +90,12 @@ PipeGrid.prototype.toPixels = function(i, j){
     return new Node(x, y);
 }
 
+function nodeToPixels(X, Y){
+    var x = X/2 * board.getFieldWidth();
+    var y = Y/2 * board.getFieldHeight();
+    return new Node(x, y);
+}
+
 
 /*Przelicza współrzędne pola na współrzędne gridu - czyli węzła*/
 function Node(X, Y){

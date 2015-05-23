@@ -14,6 +14,9 @@ function modifyConnections(field, code){
 	var x = leftTab.X + 1; //reverting co center;
 	var y = leftTab.Y;
 
+	alert("Modification of suround node: X = " + X + ", Y = " + Y);
+	alert("Array position of left node: x = " + x + ", y = " + y);
+
 	switch(code){
 		case 2:
 			pipeGrid.nodes[x - 1][y][1] = new Node(X + 1, Y)
@@ -52,5 +55,21 @@ function modifyConnections(field, code){
 			pipeGrid.nodes[x][y + 1][0] = new Node(X + 1, Y);
 			break;
 	}
+
+	try{
+		alert("Left X = " + pipeGrid.nodes[x - 1][y][1].X + ", Y = " + pipeGrid.nodes[x - 1][y][1].Y);
+	}catch(err){}
+
+	try{
+		alert("Top X = " + pipeGrid.nodes[x][y][1].X + ", Y = " + pipeGrid.nodes[x][y][1].Y);
+	}catch(err){}
+
+	try{
+		alert("Right X = " + pipeGrid.nodes[x + 1][y][0].X + ", Y = " + pipeGrid.nodes[x + 1][y][0].Y);
+	}catch(err){}
+
+	try{
+		alert("Bottom X = " + pipeGrid.nodes[x][y + 1][0].X + ", Y = " + pipeGrid.nodes[x][y + 1][0].Y);
+	}catch(err){}
 
 }
