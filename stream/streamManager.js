@@ -6,6 +6,6 @@ function initStream(){
 	//paintBlock(field, images.);
 	board.drawBlock(field, code);
 
-	var stream = new Stream(2, 3, 4, 3, 'blue', 20);
+	var stream = new Stream(2, 3, 4, 3, 'blue', 5);
 	stream.init();
 }
