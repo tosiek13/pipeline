@@ -15,8 +15,8 @@ function Stream(XBeg, YBeg, XEnd, YEnd, color, width){
 Stream.prototype.animate = function(){
     alert("animate");
     this.changeField();
-    this.cratePath();
     setTimeout(nextAnimationCaller, 3000, this);
+    this.cratePath();
     new Animation(this.canvas, this.path, 3000, 30, this);
 }
 

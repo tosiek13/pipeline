@@ -18,16 +18,17 @@ function initGame(){
     pipeGrid.paint();
 
     //initStream();
-    var arc = new Arc(3, 4, 2, 5, 4);
+    var arc = new Arc(4, 3, 3, 2, 4);
+    new Animation(boardCanvas, arc, 3000, 30, this);
 
-    ctx = boardCanvas.getContext("2d");
+    /*ctx = boardCanvas.getContext("2d");
     ctx.beginPath();
         
     ctx.arc(arc.xCenter, arc.yCenter, arc.radius, arc.angleBeg, arc.angleEnd);
         //animator.ctx.arc(100, 75, 50, 0, 2 * Math.PI);
     ctx.lineWidth = 5;
     ctx.strokeStyle = 'green';
-    ctx.stroke();
+    ctx.stroke();*/
 
 
     /*var inA = pipeGrid.getNeighbours(1, 0);

@@ -46,6 +46,45 @@ function Arc(XBeg, YBeg, XEnd, YEnd){
 }
 
 Arc.prototype.draw = function(self, animator){
+    alert("drawing right arc");
+    if (animator.percent <= 1){
+        animator.ctx = animator.canvas.getContext("2d");
+        animator.ctx.beginPath();
+        
+        alert("xCenter = " + self.xCenter + ", yCenter = " + self.yCenter + ", radious = " + self.radius + ", angleBeg = " + self.angleBeg + ", angleEnd = " + self.angleEnd);
+        if( self.angleBeg > self.angleEnd){
+            animator.ctx.arc(self.xCenter, self.yCenter, self.radius, self.angleBeg - (Math.PI/2 * animator.percent),  self.angleBeg);
+        }else{
+            animator.ctx.arc(self.xCenter, self.yCenter, self.radius, self.angleBeg, self.angleBeg + (Math.PI/2 * animator.percent));
+        }
+        animator.ctx.lineWidth = self.width;
+        animator.ctx.strokeStyle = self.color;
+        animator.ctx.stroke();
+        animator.percent += animator.step;
+    }else{
+        animator.endPainting(animator);
+    }
+}
+
+/*Works for ++*/
+/*Arc.prototype.draw = function(self, animator){
+    alert("drawing right arc");
+    if (animator.percent <= 1){
+        animator.ctx = animator.canvas.getContext("2d");
+        animator.ctx.beginPath();
+        
+        alert("xCenter = " + self.xCenter + ", yCenter = " + self.yCenter + ", radious = " + self.radius + ", angleBeg = " + self.angleBeg + ", angleEnd = " + self.angleEnd);
+        animator.ctx.arc(self.xCenter, self.yCenter, self.radius, self.angleBeg, self.angleBeg + (Math.PI/2 * animator.percent));
+        animator.ctx.lineWidth = self.width;
+        animator.ctx.strokeStyle = self.color;
+        animator.ctx.stroke();
+        animator.percent += animator.step;
+    }else{
+        animator.endPainting(animator);
+    }
+}*/
+
+/*Arc.prototype.draw = function(self, animator){
     alert("drawing arc")
     if (animator.percent <= 1){
         animator.ctx = animator.canvas.getContext("2d");
@@ -61,7 +100,7 @@ Arc.prototype.draw = function(self, animator){
     }else{
         animator.endPainting(animator);
     }
-}
+}*/
 
 Arc.prototype.initilize = function(XBeg, YBeg, XEnd, YEnd){
     alert("initialization !!!!!!!!!!!! of Arc");
