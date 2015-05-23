@@ -1,25 +1,21 @@
-//Identifying canvas element
-var c = document.getElementById("canvas");
-//Retrieves the context to be drawn or null if not 
-//supported by the browser
-var ctx = c.getContext("2d");
 //Assigning squareClick() function to click on canvas
-c.addEventListener("click", click);
+//boardCanvas.addEventListener("click", drawAnimation);
 
-function click(e){
-   
-    var line = new Line(0,0,100,100,'blue', 2);
-    var animation = new Animation(line, 2000, 30);
+function drawAnimation(e){
+    var canvas = document.getElementById("board");
+    
+    var line = new Line(50, 40, 0, 100,'blue', 6);
+    var animation = new Animation(canvas, line, 2000, 30);
 }
 
 /*
 * Klasa opisująca linię i pozwalająca ją narysować.
 */
-function Line(xBeg, yBeg, xEnd, yEnd, color, width){
+function Line(xBeg, yBeg, xMove, yMove, color, width){
     this.xBeg = xBeg;
-    this.xEnd = xEnd;
     this.yBeg = yBeg;
-    this.yEnd = yEnd;
+    this.xMove = xMove;
+    this.yMove = yMove;
     this.color = color;
     this.width = width;
 }
@@ -27,12 +23,13 @@ function Line(xBeg, yBeg, xEnd, yEnd, color, width){
 /* Rysuje linię, pod nadzorem animatora, który kontroluje postęp rysowania, oraz udostępnia interfejs do zakończenia operacji. */
 Line.prototype.draw = function(self, animator) {
     if (animator.percent <= 1){
-        ctx.beginPath();
-        ctx.moveTo(self.xBeg, self.yBeg);
-        ctx.lineTo(self.xEnd * animator.percent, self.yEnd * animator.percent);
-        ctx.lineWidth = self.width;
-        ctx.strokeStyle = self.color;
-        ctx.stroke();
+        animator.ctx = animator.canvas.getContext("2d");
+        animator.ctx.beginPath();
+        animator.ctx.moveTo(self.xBeg, self.yBeg);
+        animator.ctx.lineTo(self.xMove * animator.percent + self.xBeg, self.yMove * animator.percent + self.yBeg);
+        animator.ctx.lineWidth = self.width;
+        animator.ctx.strokeStyle = self.color;
+        animator.ctx.stroke();
         animator.percent += animator.step;
     }else{
         animator.endPainting(animator);
@@ -43,7 +40,9 @@ Line.prototype.draw = function(self, animator) {
 * Utworzenie obiektu jest równoważne z rozpoczęciem animacji.
 * Jako parametr przyjmuje ona obiekt z metodą rysującą, porządany czas trwania animacji oraz ilość klatek na sekundę.
 **/
-function Animation(toAnimate, time_ms, fps){
+function Animation(canvas, toAnimate, time_ms, fps){
+    this.canvas = canvas;
+    this.ctx;
     this.toAnimate = toAnimate;
     this.allFrames = fps * time_ms / 1000;
     this.interval = 1 / fps * 1000;

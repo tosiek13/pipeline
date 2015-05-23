@@ -34,15 +34,20 @@ Queue.prototype.getNextBlock = function(){
 	 return nextIndex;
 }
 
+Queue.prototype.spyQueue = function(){
+	return this.array[0];
+}
+
 /*Prints current buffer content on canvas*/
 Queue.prototype.printBuffer = function(){
 	for(var i  = 0;i<this.size; i++){
 		var blockWidth = board.getFieldWidth();
-		this.canvas.getContext("2d").drawImage(getImage(this.array[i]) , i * blockWidth , 0, this.height, blockWidth);
+		this.canvas.getContext("2d").drawImage(images.getImage(this.array[i]) , i * blockWidth , 0, blockWidth, this.height);
 	}
 }
  
 /*Returns random block (it's code reprezentation)*/
 Queue.prototype.getIndex = function(){
-    return Math.floor((Math.random() * blocksAmount));
+	//+2 bo code 0 i 1 oznaczeją zapełnienie.
+    return Math.floor((Math.random() * blocksAmount + 2));
 }

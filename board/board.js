@@ -10,23 +10,8 @@ function Board(canvas, rows, cols){
 }
 
 /*Drows current(first from queue clock) on element that was pass as param*/
-Board.prototype.drawCurrentBlock = function(field) {
-    this.canvas.getContext("2d").drawImage(getImage(nextImage), field.x + 0.5, field.y + 0.5, this.fieldWidth - 1, this.fieldHeight - 1);
-}
-
-/***
-* Object that represents field on board.
-** It holds information about it's posicion on canvas.
-** Value is a distance between left-top corner of canvas
-** and left-top of field.
-** Small letters (x, y) - pixel distance.
-** Big letters(X, Y) - field distance.
-***/
-function Field(Y, X){
-    this.X = X;
-    this.Y = Y;
-    this.x = X * board.getFieldWidth();
-    this.y = Y * board.getFieldHeight();
+Board.prototype.drawBlock = function(field, imageCode) {
+    this.canvas.getContext("2d").drawImage(images.getImage(imageCode), field.x + 0.5, field.y + 0.5, this.fieldWidth - 1, this.fieldHeight - 1);
 }
 
 /*Creates Board and paints it*/
@@ -34,7 +19,15 @@ Board.prototype.createBoard = function() {
 	/* Creating fields */
 	this.createFields();
 
-	/*Cainting board*/
+    /* Paintinh help lines */
+    this.paintBoard();
+
+    //Adding click listener - when user click on boardBanvas.
+	this.canvas.addEventListener("click", clickHandler);
+}
+
+Board.prototype.paintBoard = function(){
+    /*Cainting board*/
     this.ctx = this.canvas.getContext("2d");
 
     this.ctx.beginPath();
@@ -53,9 +46,6 @@ Board.prototype.createBoard = function() {
     //Painting on canvas
     this.ctx.strokeStyle = "blue";
     this.ctx.stroke();
-
-    //Adding click listener - when user click on boardBanvas.
-	this.canvas.addEventListener("click", clickHandler);
 }
 
 Board.prototype.createFields = function(){
@@ -75,4 +65,26 @@ Board.prototype.getFieldHeight = function(){
 
 Board.prototype.getFieldWidth = function(){
 	return this.fieldWidth;
+}
+
+
+////////////// FIELD /////////////////////////
+/***
+* Object that represents field on board.
+** It holds information about it's posicion on canvas.
+** Value is a distance between left-top corner of canvas
+** and left-top of field.
+** Small letters (x, y) - pixel distance.
+** Big letters(X, Y) - field distance.
+***/
+function Field(Y, X){
+    this.X = X;
+    this.Y = Y;
+    this.x = X * board.getFieldWidth();
+    this.y = Y * board.getFieldHeight();
+    this.code;
+}
+
+Field.prototype.setCode = function(code){
+    this.code = code;
 }
