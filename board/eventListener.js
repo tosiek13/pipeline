@@ -2,13 +2,21 @@
 function clickHandler(e) {
     //Geting field that was clicked
     var field = getField(e);
-     
-    var nextBlockCode = queue.spyQueue();
-    modifyConnections(field, nextBlockCode);
 
-    //Paints the current block on specified field
-    var nextImage = queue.getNextBlock();
-    paintBlock(field, nextImage);
+    //Check weather this field is active
+    if ( board.isActive(field)){
+        alert("Can be modify.");
+
+        var nextBlockCode = queue.spyQueue();
+        board.setFieldState(field, nextBlockCode);
+        modifyConnections(field, nextBlockCode);
+
+        //Paints the current block on specified field
+        var nextImage = queue.getNextBlock();
+        paintBlock(field, nextImage);
+    }else{
+         alert("Unmod element.");
+    }
 }
  
  /* Paints the current block on specified field */

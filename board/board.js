@@ -11,7 +11,6 @@ function Board(canvas, rows, cols){
 
 /*Drows current(first from queue clock) on element that was pass as param*/
 Board.prototype.drawBlock = function(field, imageCode) {
-    alert("Drowing field: x = " + field.X + ", y = " + field.Y + ", imageCode = " + imageCode);
     this.canvas.getContext("2d").drawImage(images.getImage(imageCode), field.x + 0.5, field.y + 0.5, this.fieldWidth - 1, this.fieldHeight - 1);
 }
 
@@ -49,6 +48,11 @@ Board.prototype.paintBoard = function(){
     this.ctx.stroke();
 }
 
+Board.prototype.setFieldState = function(field, code){
+    alert("Setting sate of : Y = " + field.Y + ", X = " + field.X + ", to: " + code);
+    this.fields[field.Y][field.X].code = code;
+}
+
 Board.prototype.createFields = function(){
 	//Initializing Board with Fields
     for (var row = 0; row < this.rows; row++) {
@@ -66,6 +70,23 @@ Board.prototype.getFieldHeight = function(){
 
 Board.prototype.getFieldWidth = function(){
 	return this.fieldWidth;
+}
+
+Board.prototype.getFieldFromGridEdges = function(XBeg, YBeg, XEnd, YEnd){
+    var XGrid;
+    var YGrid;
+    if( XBeg%2 == 1){
+        XGrid = XBeg;
+    }else{
+        XGrid = XEnd;
+    }
+    if( YBeg%2 == 1){
+        YGrid = YBeg;
+    }else{
+        YGrid = YEnd;
+    }
+
+    return gridToField(XGrid, YGrid)
 }
 
 
@@ -86,6 +107,11 @@ function Field(Y, X){
     this.code;
 }
 
-Field.prototype.setCode = function(code){
-    this.code = code;
+Board.prototype.isActive = function(field){
+    if(this.fields[field.Y][field.X].code < 2){
+        alert("Not active");
+        return false
+    }
+    alert("Active");
+    return true;
 }

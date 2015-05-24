@@ -96,6 +96,10 @@ function nodeToPixels(X, Y){
     return new Node(x, y);
 }
 
+function gridToField(X, Y){
+    return new Field(Math.floor(Y/2), Math.floor(X/2));
+}
+
 
 /*Przelicza współrzędne pola na współrzędne gridu - czyli węzła*/
 function Node(X, Y){

@@ -9,7 +9,7 @@ function initStreams(amount){
 	/* Creating streams one in iteration*/
 	for(var i = 0; i<2 * amount; i+=2){
 		//alert("beg (FIELD):, X = " + X[i] + ", Y = " + Y[i]);
-		alert("X[0] = " + X[0] + "Y[0] = " + Y[0] + "X[2] = " + X[2] + "Y[2] = " + Y[2]);
+		//alert("X[0] = " + X[0] + "Y[0] = " + Y[0] + "X[2] = " + X[2] + "Y[2] = " + Y[2]);
 		//Tworze węzeł (z centrum) i przeliczam go na współrzędne siatki.
 		var begField = new Node(X[i], Y[i]);
 		var begGrid = pipeGrid.toNodeCoordinates(begField);
@@ -18,7 +18,7 @@ function initStreams(amount){
 
 		var endGrid = pipeGrid.toNodeCoordinates(new Node(X[i+1], Y[i+1]));
 		var endDirection = generateDirectionCoordinates(endGrid);
-		var stream = new Stream(begGrid, begDirection[0], endDirection[0],'blue'/* colors[i]*/, fieldSize * 25/100);
+		var stream = new Stream(begGrid, begDirection[0], endDirection[0], colors[i], fieldSize * 25/100);
 		streams.push(stream);
 		
 		//Setting board state
@@ -32,7 +32,7 @@ function initStreams(amount){
 
 	/* Starting streams */
 	for(var i = 0; i < streams.length; i++){
-		alert("initialization of stream " + i);
+		//alert("initialization of stream " + i);
 		streams[i].init();
 	}
 }

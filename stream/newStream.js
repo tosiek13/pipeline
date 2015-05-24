@@ -31,6 +31,8 @@ Stream.prototype.changeField = function(){
             var YN = neighbours[i].Y;
             if(XN != this.XBeg || YN != this.YBeg){
                 this.updateCoordinates(XN, YN);
+                var fieldNode = board.getFieldFromGridEdges(this.XBeg, this.YBeg, XN, YN);
+                board.setFieldState(fieldNode, 1);
                 break;
             }
         }
@@ -48,7 +50,7 @@ Stream.prototype.init = function(){
     var ctx = boardCanvas.getContext("2d");
     ctx.beginPath();
     ctx.arc(x, y, fieldSize * 0.15, 0, 2 * Math.PI);
-    ctx.fillStyle = this.color
+    ctx.fillStyle = this.color;
     ctx.fill();
     ctx.strokeStyle = this.color;
     ctx.stroke();
@@ -68,7 +70,7 @@ Stream.prototype.cratePath = function(){
         this.path = new Line(begCoor.X, begCoor.Y, endCoor.X - begCoor.X, endCoor.Y - begCoor.Y, this.color, this.width);
         return;
     }else{
-        this.path = new Arc(this.XBeg, this.YBeg, this.XEnd, this.YEnd);
+        this.path = new Arc(this.XBeg, this.YBeg, this.XEnd, this.YEnd, this.color, this.width);
         return;
     }
     alert("EndGame - no neighbour");
