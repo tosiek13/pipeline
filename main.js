@@ -1,5 +1,6 @@
 /* Creating board */
 function initGame(){
+
     images = new Images();
     images.load();
 
@@ -19,5 +20,5 @@ function play(){
     pipeGrid = new PipeGrid(boardCanvas);
     pipeGrid.createNodes();
 
-    initStreams(1);
+    initStreams(3);
 }

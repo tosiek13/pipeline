@@ -81,6 +81,70 @@ function modifyConnections(field, code){
 
 	}
 
+	/*switch(code){
+		case 2:
+			pipeGrid.nodes[y][x - 1][1] = new Node(X + 1, Y)
+			pipeGrid.nodes[y][x][1] = null;
+			pipeGrid.nodes[y][x + 1][0] = new Node(X - 1, Y);
+			pipeGrid.nodes[y + 1][x][0] = null;
+			break;
+		case 3:
+			pipeGrid.nodes[y][x - 1][1] = null
+			pipeGrid.nodes[y][x][1] = new Node(X, Y + 1);
+			pipeGrid.nodes[y][x + 1][0] = null;
+			pipeGrid.nodes[y + 1][x][0] = new Node(X, Y - 1);
+			break;
+		case 4:
+			pipeGrid.nodes[y][x - 1][1] = new Node(X, Y + 1);
+			pipeGrid.nodes[y][x][1] = null;
+			pipeGrid.nodes[y][x + 1][0] = null;
+			pipeGrid.nodes[y + 1][x][0] = new Node(X - 1, Y);
+			break;
+		case 5:
+			pipeGrid.nodes[y][x - 1][1] = new Node(X, Y - 1);
+			pipeGrid.nodes[y][x][1] = new Node(X - 1, Y);
+			pipeGrid.nodes[y][x + 1][0] = null;
+			pipeGrid.nodes[y + 1][x][0] = null;
+			break;
+		case 6:
+			pipeGrid.nodes[y][x - 1][1] = null;
+			pipeGrid.nodes[y][x][1] = new Node(X + 1, Y);
+			pipeGrid.nodes[y][x + 1][0] = new Node(X, Y - 1);
+			pipeGrid.nodes[y + 1][x][0] = null;
+			break;
+		case 7:
+			pipeGrid.nodes[y][x - 1][1] = null;
+			pipeGrid.nodes[y][x][1] = null;
+			pipeGrid.nodes[y][x + 1][0] = new Node(X, Y + 1);
+			pipeGrid.nodes[y + 1][x][0] = new Node(X + 1, Y);
+			break;
+		case 8:
+			pipeGrid.nodes[y][x - 1][1] = new Node(X, Y);
+			pipeGrid.nodes[y][x][1] = null;
+			pipeGrid.nodes[y][x + 1][0] = null;
+			pipeGrid.nodes[y + 1][x][0] = null;
+			break;
+		case 9:
+			pipeGrid.nodes[y][x - 1][1] = null;
+			pipeGrid.nodes[y][x][1] = new Node(X, Y);
+			pipeGrid.nodes[y][x + 1][0] = null;
+			pipeGrid.nodes[y + 1][x][0] = null;
+			break;
+		case 10:
+			pipeGrid.nodes[y][x - 1][1] = null;
+			pipeGrid.nodes[y][x][1] = null;
+			pipeGrid.nodes[y][x + 1][0] = new Node(X, Y);
+			pipeGrid.nodes[y + 1][x][0] = null;
+			break;
+		case 11:
+			pipeGrid.nodes[y][x - 1][1] = null;
+			pipeGrid.nodes[y][x][1] = null;
+			pipeGrid.nodes[y][x + 1][0] = null;
+			pipeGrid.nodes[y + 1][x][0] = new Node(X, Y);
+			break;
+
+	}*/
+
 	/*try{
 		alert("Left X = " + pipeGrid.nodes[x - 1][y][1].X + ", Y = " + pipeGrid.nodes[x - 1][y][1].Y);
 	}catch(err){}

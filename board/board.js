@@ -109,9 +109,9 @@ function Field(Y, X){
 
 Board.prototype.isActive = function(field){
     if(this.fields[field.Y][field.X].code < 2){
-        alert("Not active");
+        //alert("Not active");
         return false
     }
-    alert("Active");
+    //alert("Active");
     return true;
 }

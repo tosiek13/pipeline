@@ -5,7 +5,7 @@ function clickHandler(e) {
 
     //Check weather this field is active
     if ( board.isActive(field)){
-        alert("Can be modify.");
+        //alert("Can be modify.");
 
         var nextBlockCode = queue.spyQueue();
         board.setFieldState(field, nextBlockCode);
@@ -15,7 +15,7 @@ function clickHandler(e) {
         var nextImage = queue.getNextBlock();
         paintBlock(field, nextImage);
     }else{
-         alert("Unmod element.");
+         //alert("Unmod element.");
     }
 }
  

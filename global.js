@@ -8,12 +8,12 @@ var blocksAmount = 6;
 var colors = ['blue', 'green', 'red'];
 
 /* Ustawienie wymiarów planczy - liczba pól na szerokość i w pionie. */
-var boardWidth = 2;
-var boardHeight = 2;
+var boardWidth = 16;
+var boardHeight = 12;
 
 /* Ustawienie szerokości planczy - stała, a wysokośc dopasowuje się tak, żeby pola były kwadratowe. */
-boardCanvas.width = 600;			
-boardCanvas.height = 600 * boardHeight / boardWidth;
+boardCanvas.width = 800;			
+boardCanvas.height = boardCanvas.width * boardHeight / boardWidth;
 /* Wyższe ustawienia determinują wielkość kwadratowego bloczka (pola) */
 var fieldSize = boardCanvas.width / boardWidth;
 
