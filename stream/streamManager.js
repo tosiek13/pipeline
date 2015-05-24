@@ -24,10 +24,12 @@ function initStreams(amount){
 		//Setting board state
 		modifyConnections(begField, begDirection[1]);
 		board.drawBlock(new Field(Y[i], X[i]), begDirection[1]);
+		board.setFieldState(new Field(Y[i], X[i]), 1);
 
 		var endNode = new Node(X[i+1], Y[i+1]);
 		modifyConnections(endNode, endDirection[1]);
 		board.drawBlock(new Field(endNode.Y, endNode.X), begDirection[1]);
+		board.setFieldState(new Field(endNode.Y, endNode.X), 0);
 	}
 
 	/* Starting streams */
