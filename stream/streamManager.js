@@ -13,6 +13,7 @@ function initStreams(amount){
 		//Tworze węzeł (z centrum) i przeliczam go na współrzędne siatki.
 		var begField = new Node(X[i], Y[i]);
 		var begGrid = pipeGrid.toNodeCoordinates(begField);
+		
 		//Ustalam kierunek.
 		var begDirection = generateDirectionCoordinates(begGrid);
 
@@ -23,12 +24,14 @@ function initStreams(amount){
 		
 		//Setting board state
 		modifyConnections(begField, begDirection[1]);
+		alert("Beg code: " + begDirection[1]);
 		board.drawBlock(new Field(Y[i], X[i]), begDirection[1]);
 		board.setFieldState(new Field(Y[i], X[i]), 1);
 
 		var endNode = new Node(X[i+1], Y[i+1]);
 		modifyConnections(endNode, endDirection[1]);
-		board.drawBlock(new Field(endNode.Y, endNode.X), begDirection[1]);
+		alert("End code: " + begDirection[1]);
+		board.drawBlock(new Field(endNode.Y, endNode.X), endDirection[1]);
 		board.setFieldState(new Field(endNode.Y, endNode.X), 0);
 	}
 
@@ -69,14 +72,18 @@ function generateDirectionCoordinates(gridNode){
 				nextY = Y + 1;
 				break;
 		}
-		if ( !isInBorder(nextX, nextY))
+
+		if ( !isInBorder(nextX, nextY)){
+			alert("X = " +  nextX + ", X = " + nextY + ", code" + code);
 			return new Array(new Node(nextX, nextY), code);
+		}
+		alert("In board");
 	}
 }
 
 /* Checks weather the node lay on boarder of board X, Y grid coordinates */
 function isInBorder(X, Y){
-	if( X == 0 || Y == 0 || X > (2 * boardHeight - 1) || Y > ( 2* boardWidth - 1))
+	if( X < 1 || Y < 1 || X > (2 * boardHeight - 1) || Y > ( 2* boardWidth - 1))
 		return true;
 	return false;
 }
