@@ -25,9 +25,8 @@ function initStreams(amount){
 		//Wyznaczam kierunek strumienia a także współrzędne brzegu pola
 		var endDirection = generateDirectionCoordinates(endGrid);
 
-
 				//Upewni się, że endGeig to end Grid - centrum pola 
-		var stream = new Stream(begGrid, begDirection[0], endGrid, colors[ID++], fieldSize * 25/100);
+		var stream = new Stream(begGrid, begDirection[0], endGrid, colors[ID++%colors.length], fieldSize * 25/100);
 		streams.push(stream);
 		
 		//SETTING BOARD STATE

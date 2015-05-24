@@ -1,74 +1,96 @@
-boardCanvas.addEventListener("click", paint);
-
-function paint(){
-    var stream = new Stream(10, 50, 25, 225, 'red', 7);
-    stream.animate();
-}
-
-function Stream(xBeg, yBeg, xEnd, yEnd, color, width){
-    this.xBeg = xBeg;
-    this.yBeg = yBeg;
-    this.xEnd = xEnd;
-    this.yEnd = yEnd;
-
-    this.currentField = this.getNextField();
-    this.xMove;
-    this.yMove;
+/*  */
+function Stream(begNode, direcionNode, endNode, color, width){
+    this.XBeg = begNode.X;
+    this.YBeg = begNode.Y;
+    this.XEnd = direcionNode.X;
+    this.YEnd = direcionNode.Y;
+    this.XStop = endNode.X;
+    this.YStop = endNode.Y;
+    this.color = color;
+    this.width = width;
+    this.active = true;
 
     this.canvas = document.getElementById("board");
 
-    this.color = color;
-    this.width = width;
-
-    this.line = new Line(this.xBeg, this.yBeg, this.xEnd - this.xBeg, this.yEnd - this.yBeg, this.color, this.width);
+    /////////////////////////////////////////////////////////////////////////////Zajmi się tworzeniem path;
+    this.path;
 }
 
 Stream.prototype.animate = function(){
-    setTimeout(nextAnimationCaller, 3000, this);
-    new Animation(this.canvas, this.line, 3000, 30, this);
     this.changeField();
+    if(this.active){
+        setTimeout(nextAnimationCaller, 3000, this);
+        this.cratePath();
+        new Animation(this.canvas, this.path, 3000, 30, this);
+    }
 }
 
 Stream.prototype.changeField = function(){
-    this.currentField = this.getNextField();
-    this.countMove();
-    this.updateCoordinates();
-    this.line = new Line(this.xBeg, this.yBeg, this.xEnd - this.xBeg, this.yEnd - this.yBeg, this.color, this.width);
-   // alert("xBeg = " + this.xBeg + " yBeg = " + this.yBeg + "xEnd = " + this.xEnd + " yEnd = " + this.yEnd );
+    var neighbours = pipeGrid.getNeighbours(this.XEnd, this.YEnd);
+
+    for(i = 0; i<2; i++){
+        if (neighbours[i] != null){
+            var XN = neighbours[i].X;
+            var YN = neighbours[i].Y;
+            if(XN != this.XBeg || YN != this.YBeg){
+                this.updateCoordinates(XN, YN);
+                var fieldNode = board.getFieldFromGridEdges(this.XBeg, this.YBeg, XN, YN);
+                board.setFieldState(fieldNode, 1);
+                break;
+            }
+        }
+        if( i == 1){
+            this.active = false;
+        }
+    }
+}
+
+Stream.prototype.init = function(){
+    //Creating Line from Beg to first Edge.
+    var x = this.XBeg / 2 * board.getFieldWidth();
+    var y = this.YBeg / 2 * board.getFieldHeight();
+    var xDiff = (this.XEnd - this.XBeg) / 2 * board.getFieldWidth();
+    var yDiff = (this.YEnd - this.YBeg) / 2 * board.getFieldHeight();
+
+    var ctx = boardCanvas.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(x, y, fieldSize * 0.15, 0, 2 * Math.PI);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+    ctx.strokeStyle = this.color;
+    ctx.stroke();
+
+    var line = new Line(x, y, xDiff, yDiff, this.color, this.width);
+
+    setTimeout(nextAnimationCaller, 10000, this);
+    new Animation(this.canvas, line, 10000, 30, this);
+}
+
+Stream.prototype.cratePath = function(){
+    var begCoor = nodeToPixels(this.XBeg, this.YBeg);
+    var endCoor = nodeToPixels(this.XEnd, this.YEnd);
+
+    //Linia prosta
+    if(this.XBeg == this.XEnd || (this.YBeg == this.YEnd)){
+        this.path = new Line(begCoor.X, begCoor.Y, endCoor.X - begCoor.X, endCoor.Y - begCoor.Y, this.color, this.width);
+        return;
+    }else{
+        this.path = new Arc(this.XBeg, this.YBeg, this.XEnd, this.YEnd, this.color, this.width);
+        return;
+    }
 }
 
 function nextAnimationCaller(stream){
     stream.animate();
 }
 
-//Called After counting moves in both axes;
-Stream.prototype.updateCoordinates = function(){
-    this.xBeg = this.xEnd;
-    this.yBeg = this.yEnd;
-    this.xEnd = this.xBeg + this.xMove;
-    this.yEnd = this.yEnd + this.yMove;
-}
+//Called after changing field
+Stream.prototype.updateCoordinates = function(newXEnd, newYEnd){
+    this.XBeg = this.XEnd;
+    this.YBeg = this.YEnd;
+    this.XEnd = newXEnd;
+    this.YEnd = newYEnd;
 
-/*Counts next field to go (after swiming throught actual)*/
-Stream.prototype.getNextField = function(){
-    var xDiff = this.xEnd - this.xBeg;
-    var yDiff = this.yEnd - this.yBeg;
-
-    var xInNextField;
-    var yInNextField;
-    if(xDiff != 0){
-        xInNextField = this.xEnd + xDiff;
-    }else{
-        xInNextField = this.xEnd;
-    }
-
-    if(yDiff != 0){
-        yInNextField = this.yEnd + yDiff;
-    }else{
-        yInNextField = this.yEnd;
-    }
-
-    return  getFieldFromCoordinates(yInNextField, xInNextField);
 }
 
  /* gets the field, thatwas cliecked */

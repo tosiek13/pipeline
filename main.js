@@ -20,5 +20,5 @@ function play(){
     pipeGrid = new PipeGrid(boardCanvas);
     pipeGrid.createNodes();
 
-    initStreams(3);
+    initStreams(5);
 }
