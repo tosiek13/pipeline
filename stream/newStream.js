@@ -8,6 +8,7 @@ function Stream(begNode, direcionNode, endNode, color, width){
     this.YStop = endNode.Y;
     this.color = color;
     this.width = width;
+    this.active = true;
 
     this.canvas = document.getElementById("board");
 
@@ -17,15 +18,18 @@ function Stream(begNode, direcionNode, endNode, color, width){
 
 Stream.prototype.animate = function(){
     this.changeField();
-    setTimeout(nextAnimationCaller, 3000, this);
-    this.cratePath();
-    new Animation(this.canvas, this.path, 3000, 30, this);
+    if(this.active){
+        setTimeout(nextAnimationCaller, 3000, this);
+        this.cratePath();
+        new Animation(this.canvas, this.path, 3000, 30, this);
+    }
 }
 
 Stream.prototype.changeField = function(){
     var neighbours = pipeGrid.getNeighbours(this.XEnd, this.YEnd);
 
-    for(var i = 0; i<2; i++){
+    var i;
+    for(i = 0; i<2; i++){
         if (neighbours[i] != null){
             var XN = neighbours[i].X;
             var YN = neighbours[i].Y;
@@ -36,8 +40,11 @@ Stream.prototype.changeField = function(){
                 break;
             }
         }
+        alert(i);
+        if( i == 1){
+            this.active = false;
+        }
     }
-    //alert("No neighbours found - you losed");
 }
 
 Stream.prototype.init = function(){
@@ -73,7 +80,6 @@ Stream.prototype.cratePath = function(){
         this.path = new Arc(this.XBeg, this.YBeg, this.XEnd, this.YEnd, this.color, this.width);
         return;
     }
-    alert("EndGame - no neighbour");
 }
 
 function nextAnimationCaller(stream){

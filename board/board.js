@@ -49,7 +49,7 @@ Board.prototype.paintBoard = function(){
 }
 
 Board.prototype.setFieldState = function(field, code){
-    alert("Setting sate of : Y = " + field.Y + ", X = " + field.X + ", to: " + code);
+    //alert("Setting sate of : Y = " + field.Y + ", X = " + field.X + ", to: " + code);
     this.fields[field.Y][field.X].code = code;
 }
 
