@@ -45,6 +45,14 @@ Stream.prototype.init = function(){
     var xDiff = (this.XEnd - this.XBeg) / 2 * board.getFieldWidth();
     var yDiff = (this.YEnd - this.YBeg) / 2 * board.getFieldHeight();
 
+    var ctx = boardCanvas.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(x, y, fieldSize * 0.15, 0, 2 * Math.PI);
+    ctx.fillStyle = this.color
+    ctx.fill();
+    ctx.strokeStyle = this.color;
+    ctx.stroke();
+
     var line = new Line(x, y, xDiff, yDiff, this.color, this.width);
 
     setTimeout(nextAnimationCaller, 10000, this);
