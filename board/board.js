@@ -44,7 +44,7 @@ Board.prototype.paintBoard = function(){
     }
  
     //Painting on canvas
-    this.ctx.strokeStyle = "blue";
+    this.ctx.strokeStyle = "green";
     this.ctx.stroke();
 }
 
@@ -109,9 +109,7 @@ function Field(Y, X){
 
 Board.prototype.isActive = function(field){
     if(this.fields[field.Y][field.X].code < 2){
-        //alert("Not active");
         return false
     }
-    //alert("Active");
     return true;
 }

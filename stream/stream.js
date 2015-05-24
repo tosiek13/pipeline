@@ -49,17 +49,6 @@ Stream.prototype.updateCoordinates = function(){
     this.yEnd = this.yEnd + this.yMove;
 }
 
-/* Reads move according the code read from  */
-Stream.prototype.countMove = function(){
-    var code = this.currentField.code;
-    code = 1;
-    switch (code){
-        case 1:
-            this.xMove = 20;
-            this.yMove = 20;
-    }
-}
-
 /*Counts next field to go (after swiming throught actual)*/
 Stream.prototype.getNextField = function(){
     var xDiff = this.xEnd - this.xBeg;

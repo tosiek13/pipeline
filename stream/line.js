@@ -27,7 +27,7 @@ Line.prototype.draw = function(self, animator) {
         animator.ctx.moveTo(self.xBeg, self.yBeg);
         animator.ctx.lineTo(self.xMove * animator.percent + self.xBeg, self.yMove * animator.percent + self.yBeg);
         animator.ctx.lineWidth = self.width;
-        animator.ctx.strokeStyle = animator.color;
+        animator.ctx.strokeStyle = self.color;
         animator.ctx.stroke();
         animator.percent += animator.step;
     }else{
@@ -51,7 +51,7 @@ Arc.prototype.draw = function(self, animator){
     if (animator.percent <= 1){
         animator.ctx = animator.canvas.getContext("2d");
         animator.ctx.beginPath();
-        animator.ctx.strokeStyle = animator.color;
+        //animator.ctx.strokeStyle = animator.color;
         
         if( self.angleBeg > self.angleEnd){
             animator.ctx.arc(self.xCenter, self.yCenter, self.radius, self.angleBeg - (Math.PI/2 * animator.percent),  self.angleBeg);

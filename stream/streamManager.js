@@ -1,6 +1,7 @@
 /*Powoduje zainicjowanie strumieni*/
 function initStreams(amount){
 	streams = [];
+	var ID = 0;
 
 	//Coordinates of field - start/ends of streams.
 	var X = generateArrayWithUniqueValuesFromRange(0, boardHeight, 2 * amount);
@@ -26,7 +27,7 @@ function initStreams(amount){
 
 
 				//Upewni się, że endGeig to end Grid - centrum pola 
-		var stream = new Stream(begGrid, begDirection[0], endGrid, colors[i], fieldSize * 25/100);
+		var stream = new Stream(begGrid, begDirection[0], endGrid, colors[ID++], fieldSize * 25/100);
 		streams.push(stream);
 		
 		//SETTING BOARD STATE
@@ -96,8 +97,6 @@ function generateDirectionCoordinates(gridNode){
 
 /* Checks weather the node lay on boarder of board X, Y grid coordinates */
 function isInBorder(X, Y){
-	alert(2 * boardHeight - 1);
-	alert( 2 * boardWidth - 1);
 	if( (X < 1) || (Y < 1) || (X > (2 * boardWidth - 1)) || (Y > ( 2 * boardHeight - 1)))
 		return true;
 	return false;

@@ -28,7 +28,6 @@ Stream.prototype.animate = function(){
 Stream.prototype.changeField = function(){
     var neighbours = pipeGrid.getNeighbours(this.XEnd, this.YEnd);
 
-    var i;
     for(i = 0; i<2; i++){
         if (neighbours[i] != null){
             var XN = neighbours[i].X;
@@ -40,7 +39,6 @@ Stream.prototype.changeField = function(){
                 break;
             }
         }
-        alert(i);
         if( i == 1){
             this.active = false;
         }
