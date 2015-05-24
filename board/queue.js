@@ -41,8 +41,7 @@ Queue.prototype.spyQueue = function(){
 /*Prints current buffer content on canvas*/
 Queue.prototype.printBuffer = function(){
 	for(var i  = 0;i<this.size; i++){
-		var blockWidth = board.getFieldWidth();
-		this.canvas.getContext("2d").drawImage(images.getImage(this.array[i]) , i * blockWidth , 0, blockWidth, this.height);
+		this.canvas.getContext("2d").drawImage(images.getImage(this.array[i]) , i * fieldSize , 0, fieldSize, this.height);
 	}
 }
  

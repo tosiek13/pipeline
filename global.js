@@ -16,3 +16,6 @@ boardCanvas.width = 600;
 boardCanvas.height = 600 * boardHeight / boardWidth;
 /* Wyższe ustawienia determinują wielkość kwadratowego bloczka (pola) */
 var fieldSize = boardCanvas.width / boardWidth;
+
+queueCanvas.width = 5 * fieldSize;
+queueCanvas.height = fieldSize;

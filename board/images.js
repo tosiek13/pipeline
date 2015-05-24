@@ -12,16 +12,16 @@ function Images(){
 }
 
 Images.prototype.load = function(){
+    this.code8.src = "images/code8.jpg";
+    this.code9.src = "images/code9.jpg";
+    this.code10.src = "images/code10.jpg";
+    this.code11.src = "images/code11.jpg";
 	this.code2.src = "images/code2.jpg";
 	this.code3.src = "images/code3.jpg";
 	this.code4.src = "images/code4.jpg";
 	this.code5.src = "images/code5.jpg";
 	this.code6.src = "images/code6.jpg";
 	this.code7.src = "images/code7.jpg";
-    this.code8.src = "images/code8.jpg";
-    this.code9.src = "images/code9.jpg";
-    this.code10.src = "images/code10.jpg";
-    this.code11.src = "images/code11.jpg";
 }
 
 Images.prototype.getImage = function(code){ 
@@ -41,10 +41,10 @@ Images.prototype.getImage = function(code){
         case 8:
             return this.code8;
         case 9:
-            return this.code8;
+            return this.code9;
         case 10:
-            return this.code8;
+            return this.code10;
         case 11:
-            return this.code8;
+            return this.code11;
     }
 }

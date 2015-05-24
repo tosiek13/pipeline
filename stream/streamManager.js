@@ -8,7 +8,6 @@ function initStreams(amount){
 
 	/* Creating streams one in iteration*/
 	for(var i = 0; i<2 * amount; i+=2){
-		alert("creating Stream");
 		//alert("beg (FIELD):, X = " + X[i] + ", Y = " + Y[i]);
 
 		//Tworze węzeł (z centrum) i przeliczam go na współrzędne siatki.
@@ -24,11 +23,11 @@ function initStreams(amount){
 		
 		//Setting board state
 		modifyConnections(begField, begDirection[1]);
-		board.drawBlock(begField, begDirection[1]);
+		board.drawBlock(new Field(begField.X, begField.Y), begDirection[1]);
 
 		var endNode = new Node(X[i+1], Y[i+1]);
 		modifyConnections(endNode, endDirection[1]);
-		board.drawBlock(endNode, begDirection[1]);
+		//board.drawBlock(new Field(endNode.X, endNode.Y), begDirection[1]);
 	}
 
 	/* Starting streams */
@@ -75,7 +74,7 @@ function generateDirectionCoordinates(gridNode){
 
 /* Checks weather the node lay on boarder of board X, Y grid coordinates */
 function isInBorder(X, Y){
-	if( X == 0 || Y == 0 || X > (2 * boardHeight) || Y > ( 2* boardWidth))
+	if( X == 0 || Y == 0 || X > (2 * boardHeight - 1) || Y > ( 2* boardWidth - 1))
 		return true;
 	return false;
 }
