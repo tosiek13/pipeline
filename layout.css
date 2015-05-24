@@ -1,0 +1,37 @@
+aside { float: left; background-color:#FFFFFF; width:20%;  background-color:#FFFFFF; height:205px; }
+
+emptyspace.header{ float:left; background-color:#339933; width:0.5%; height:205px; } 
+
+right { float:left; width:79.5%; height:205px; background-color:#F0F0E8; }
+
+
+
+nav { clear:both; background-color:#339933;  font-size: 150%; text-align: center;}
+
+name.sign {clear:both; float:left; width:20%; font-family: Serif; color:#FFFFFF;  background-color:#339933; }
+
+items{padding:10px; font-size:70%; }
+
+item{ color:#FFFFFF; margin:15px; }
+
+emptyspace.nav{ float:left; background-color:#339933; width:0.5%; background-color:#FFFFFF;  color:#FFFFFF; }
+
+
+
+aside.menu {float:left; background-color:#339933; width:20%;}
+
+emptyspace.menu_left {float:left; background-color:#339933; width:3%; color:#339933; }
+
+menu{float:left;  margin:10px;  padding:0px; padding-top:10px; padding-left:5px;  background-color:#339933; color:#FFFFFF; }
+
+emptyspace.menu_right {float:right; background-color:#339933; width:1%; color:#339933; }
+
+
+
+content{ float:left; width:80%; background-color:#FFFFFF; }
+
+emptyspace.content { float:left; width:0.625%; background-color:#FFFFFF; color:#FFFFFF; }
+
+emptyspace.content_left {float:left; background-color:#339933; width:2px; color:#339933; }
+
+main {float:left; width:96.375%; background-color:#FFFFFF; padding:20px;}

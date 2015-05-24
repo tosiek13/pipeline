@@ -46,12 +46,11 @@ function Arc(XBeg, YBeg, XEnd, YEnd){
 }
 
 Arc.prototype.draw = function(self, animator){
-    alert("drawing right arc");
     if (animator.percent <= 1){
         animator.ctx = animator.canvas.getContext("2d");
         animator.ctx.beginPath();
+        //animator.ctx.fillStyle(self.color);
         
-        alert("xCenter = " + self.xCenter + ", yCenter = " + self.yCenter + ", radious = " + self.radius + ", angleBeg = " + self.angleBeg + ", angleEnd = " + self.angleEnd);
         if( self.angleBeg > self.angleEnd){
             animator.ctx.arc(self.xCenter, self.yCenter, self.radius, self.angleBeg - (Math.PI/2 * animator.percent),  self.angleBeg);
         }else{
@@ -67,29 +66,23 @@ Arc.prototype.draw = function(self, animator){
 }
 
 Arc.prototype.initilize = function(XBeg, YBeg, XEnd, YEnd){
-    alert("initialization !!!!!!!!!!!! of Arc");
     var XDiff = XEnd - XBeg;
     var YDiff = YEnd - YBeg;
     var centerCoor;
-    alert("XBeg = " + XBeg + ", YBeg = " + YBeg);
-    alert("XDiff = " + XDiff + ", Y Diff = " + YDiff);
+
     if( XBeg%2 == 0){
         centerCoor = nodeToPixels(XBeg, YBeg + YDiff);
-        alert("XCenter = " + XBeg + ", Y center = " + (YBeg + YDiff));
     }else{
         centerCoor = nodeToPixels(XBeg + XDiff, YBeg);
-        alert("XCenter = " + (XBeg + XDiff) + ", Y center = " + YBeg);
     }
 
     this.xCenter = centerCoor.X;
     this.yCenter = centerCoor.Y;
-    alert("xCenter = " + this.xCenter + ", y center = " + this.yCenter);
 
     //Setting angles
     var anglePB;
     var anglePE;    //{0, 0,5, 1, 2}
     if( (XBeg%2 == 0 && (XDiff == YDiff)) || (XBeg%2 != 0 && (XDiff != YDiff))){     //Gdy obrót do przodu
-        alert("Arc ++ sign");
         if( XDiff < 0 && YDiff > 0){
             anglePB = 0;
             anglePE = 0.5;
@@ -105,7 +98,6 @@ Arc.prototype.initilize = function(XBeg, YBeg, XEnd, YEnd){
         }
 
     }else{
-        alert("Arc -- sign");
         if( XDiff < 0 && YDiff < 0){
             anglePB = 2;
             anglePE = 1.5;

@@ -1,8 +1,11 @@
-function Stream(XBeg, YBeg, XEnd, YEnd, color, width){
-    this.XBeg = XBeg;
-    this.YBeg = YBeg;
-    this.XEnd = XEnd;
-    this.YEnd = YEnd;
+/*  */
+function Stream(begNode, direcionNode, endNode, color, width){
+    this.XBeg = begNode.X;
+    this.YBeg = begNode.Y;
+    this.XEnd = direcionNode.X;
+    this.YEnd = direcionNode.Y;
+    this.XStop = endNode.X;
+    this.YStop = endNode.Y;
     this.color = color;
     this.width = width;
 
@@ -13,7 +16,6 @@ function Stream(XBeg, YBeg, XEnd, YEnd, color, width){
 }
 
 Stream.prototype.animate = function(){
-    alert("animate");
     this.changeField();
     setTimeout(nextAnimationCaller, 3000, this);
     this.cratePath();
@@ -21,17 +23,13 @@ Stream.prototype.animate = function(){
 }
 
 Stream.prototype.changeField = function(){
-    alert("changeField");
     var neighbours = pipeGrid.getNeighbours(this.XEnd, this.YEnd);
-    alert("neighbours from field  X = " + this.XEnd + " Y = " + this.YEnd);
 
     for(var i = 0; i<2; i++){
         if (neighbours[i] != null){
             var XN = neighbours[i].X;
             var YN = neighbours[i].Y;
-            alert("neighbours[" + i + "] = X " + XN + " Y = " + YN);
             if(XN != this.XBeg || YN != this.YBeg){
-                alert("Found");
                 this.updateCoordinates(XN, YN);
                 break;
             }
@@ -41,11 +39,19 @@ Stream.prototype.changeField = function(){
 }
 
 Stream.prototype.init = function(){
-   // alert("init");
+    //Creating Line from Beg to first Edge.
     var x = this.XBeg / 2 * board.getFieldWidth();
     var y = this.YBeg / 2 * board.getFieldHeight();
     var xDiff = (this.XEnd - this.XBeg) / 2 * board.getFieldWidth();
     var yDiff = (this.YEnd - this.YBeg) / 2 * board.getFieldHeight();
+
+    var ctx = boardCanvas.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(x, y, fieldSize * 0.15, 0, 2 * Math.PI);
+    ctx.fillStyle = this.color
+    ctx.fill();
+    ctx.strokeStyle = this.color;
+    ctx.stroke();
 
     var line = new Line(x, y, xDiff, yDiff, this.color, this.width);
 
@@ -54,18 +60,14 @@ Stream.prototype.init = function(){
 }
 
 Stream.prototype.cratePath = function(){
-    alert("Path creation");
     var begCoor = nodeToPixels(this.XBeg, this.YBeg);
     var endCoor = nodeToPixels(this.XEnd, this.YEnd);
-    alert("Path creating: XBeg" +  this.XBeg + " YBeg" + this.YBeg + " XEnd = " +  this.XEnd + " YEnd" + this.YEnd);
-    alert("Path creating: xbeg" +  begCoor.X + " ybeg" + begCoor.Y + " xend = " + endCoor.X + " yend = " + endCoor.Y);
+
     //Linia prosta
     if(this.XBeg == this.XEnd || (this.YBeg == this.YEnd)){
-        alert("Line");
         this.path = new Line(begCoor.X, begCoor.Y, endCoor.X - begCoor.X, endCoor.Y - begCoor.Y, this.color, this.width);
         return;
     }else{
-        alert("Arc");
         this.path = new Arc(this.XBeg, this.YBeg, this.XEnd, this.YEnd);
         return;
     }
@@ -73,7 +75,6 @@ Stream.prototype.cratePath = function(){
 }
 
 function nextAnimationCaller(stream){
-    alert("animation caller");
     stream.animate();
 }
 
@@ -84,7 +85,6 @@ Stream.prototype.updateCoordinates = function(newXEnd, newYEnd){
     this.XEnd = newXEnd;
     this.YEnd = newYEnd;
 
-    alert("new X = " + this.XEnd + ", new Y = " + this.YEnd);
 }
 
  /* gets the field, thatwas cliecked */

@@ -14,8 +14,8 @@ function modifyConnections(field, code){
 	var x = leftTab.X + 1; //reverting co center;
 	var y = leftTab.Y;
 
-	alert("Modification of suround node: X = " + X + ", Y = " + Y);
-	alert("Array position of left node: x = " + x + ", y = " + y);
+	//alert("Modification of suround node: X = " + X + ", Y = " + Y);
+	//alert("Array position of left node: x = " + x + ", y = " + y);
 
 	switch(code){
 		case 2:
@@ -54,9 +54,34 @@ function modifyConnections(field, code){
 			pipeGrid.nodes[x + 1][y][0] = new Node(X, Y + 1);
 			pipeGrid.nodes[x][y + 1][0] = new Node(X + 1, Y);
 			break;
+		case 8:
+			pipeGrid.nodes[x - 1][y][1] = new Node(X, Y);
+			pipeGrid.nodes[x][y][1] = null;
+			pipeGrid.nodes[x + 1][y][0] = null;
+			pipeGrid.nodes[x][y + 1][0] = null;
+			break;
+		case 9:
+			pipeGrid.nodes[x - 1][y][1] = null;
+			pipeGrid.nodes[x][y][1] = new Node(X, Y);
+			pipeGrid.nodes[x + 1][y][0] = null;
+			pipeGrid.nodes[x][y + 1][0] = null;
+			break;
+		case 10:
+			pipeGrid.nodes[x - 1][y][1] = null;
+			pipeGrid.nodes[x][y][1] = null;
+			pipeGrid.nodes[x + 1][y][0] = new Node(X, Y);
+			pipeGrid.nodes[x][y + 1][0] = null;
+			break;
+		case 11:
+			pipeGrid.nodes[x - 1][y][1] = null;
+			pipeGrid.nodes[x][y][1] = null;
+			pipeGrid.nodes[x + 1][y][0] = null;
+			pipeGrid.nodes[x][y + 1][0] = new Node(X, Y);
+			break;
+
 	}
 
-	try{
+	/*try{
 		alert("Left X = " + pipeGrid.nodes[x - 1][y][1].X + ", Y = " + pipeGrid.nodes[x - 1][y][1].Y);
 	}catch(err){}
 
@@ -70,6 +95,6 @@ function modifyConnections(field, code){
 
 	try{
 		alert("Bottom X = " + pipeGrid.nodes[x][y + 1][0].X + ", Y = " + pipeGrid.nodes[x][y + 1][0].Y);
-	}catch(err){}
+	}catch(err){}*/
 
 }
