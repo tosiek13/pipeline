@@ -49,7 +49,7 @@ Board.prototype.paintBoard = function(){
 }
 
 Board.prototype.setFieldState = function(field, code){
-    //alert("Setting sate of : Y = " + field.Y + ", X = " + field.X + ", to: " + code);
+    //Setting field code - to unable modifying it when it was already flooded by stream.
     this.fields[field.Y][field.X].code = code;
 }
 

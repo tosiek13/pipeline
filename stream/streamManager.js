@@ -33,7 +33,7 @@ function initStreams(amount){
 
 		//BEG element
 		//Setting neighbour state
-		modifyConnections(begField, begDirection[1]);
+		modifyConnections(begField, 1);
 		//Setting board field state
 		board.setFieldState(begField, 1);
 		//Drowing element

@@ -20,5 +20,29 @@ function play(){
     pipeGrid = new PipeGrid(boardCanvas);
     pipeGrid.createNodes();
 
-    initStreams(5);
+    initStreams(1);
+}
+
+function setGameState(gameState){
+    switch(gameState){
+        case 1:
+            alert("Congratulation you complated the game !!!");
+            gameFlag = false;
+            break;
+        case 2:
+            alert("You lose ;>");
+            gameFlag = false;
+            break;
+        case 3:
+            alert("Next level");
+            gameFlag = false
+            break;
+    }
+    boardCanvas.removeEventListener("click", clickHandler);
+}
+
+function checkEndOfGameConditions(){
+    if(streams.length == 0){
+        setGameState(1);
+    }
 }

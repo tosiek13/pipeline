@@ -18,14 +18,21 @@ function modifyConnections(field, code){
 	//alert("Array position of left node: x = " + x + ", y = " + y);
 
 	switch(code){
+		/*For flood field*/
+		case 1:
+			pipeGrid.nodes[x - 1][y][1] = null;
+			pipeGrid.nodes[x][y][1] = null;
+			pipeGrid.nodes[x + 1][y][0] = null;
+			pipeGrid.nodes[x][y + 1][0] = null;
+			break;
 		case 2:
-			pipeGrid.nodes[x - 1][y][1] = new Node(X + 1, Y)
+			pipeGrid.nodes[x - 1][y][1] = new Node(X + 1, Y);
 			pipeGrid.nodes[x][y][1] = null;
 			pipeGrid.nodes[x + 1][y][0] = new Node(X - 1, Y);
 			pipeGrid.nodes[x][y + 1][0] = null;
 			break;
 		case 3:
-			pipeGrid.nodes[x - 1][y][1] = null
+			pipeGrid.nodes[x - 1][y][1] = null;
 			pipeGrid.nodes[x][y][1] = new Node(X, Y + 1);
 			pipeGrid.nodes[x + 1][y][0] = null;
 			pipeGrid.nodes[x][y + 1][0] = new Node(X, Y - 1);

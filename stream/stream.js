@@ -4,11 +4,13 @@ function Stream(begNode, direcionNode, endNode, color, width){
     this.YBeg = begNode.Y;
     this.XEnd = direcionNode.X;
     this.YEnd = direcionNode.Y;
+    
+    //Destination coordinates
     this.XStop = endNode.X;
     this.YStop = endNode.Y;
+
     this.color = color;
     this.width = width;
-    this.active = true;
 
     this.canvas = document.getElementById("board");
 
@@ -17,8 +19,8 @@ function Stream(begNode, direcionNode, endNode, color, width){
 }
 
 Stream.prototype.animate = function(){
-    this.changeField();
-    if(this.active){
+    if(gameFlag){
+        this.changeField();
         setTimeout(nextAnimationCaller, 3000, this);
         this.cratePath();
         new Animation(this.canvas, this.path, 3000, 30, this);
@@ -36,11 +38,22 @@ Stream.prototype.changeField = function(){
                 this.updateCoordinates(XN, YN);
                 var fieldNode = board.getFieldFromGridEdges(this.XBeg, this.YBeg, XN, YN);
                 board.setFieldState(fieldNode, 1);
+                modifyConnections(fieldNode, 1);
+
+                if(this.isInStreamEnd()){
+                    var index = streams.indexOf(this);
+                    if (index > -1) {
+                        alert("DEleteing stream with indeax = " + index);
+                        streams.splice(index, 1);
+                        checkEndOfGameConditions();
+                    }
+                }
+
                 break;
             }
         }
         if( i == 1){
-            this.active = false;
+            setGameState(2);
         }
     }
 }
@@ -62,8 +75,8 @@ Stream.prototype.init = function(){
 
     var line = new Line(x, y, xDiff, yDiff, this.color, this.width);
 
-    setTimeout(nextAnimationCaller, 10000, this);
-    new Animation(this.canvas, line, 10000, 30, this);
+    setTimeout(nextAnimationCaller, 15000, this);
+    new Animation(this.canvas, line, 15000, 30, this);
 }
 
 Stream.prototype.cratePath = function(){
@@ -97,4 +110,13 @@ Stream.prototype.updateCoordinates = function(newXEnd, newYEnd){
 function getFieldFromCoordinates(x, y) {
 
     return new Field(Math.floor(y/board.getFieldHeight()), Math.floor(x/board.getFieldWidth()));
+}
+
+/* Cheeks weather next destination node is end of stream.
+** if so, checks weather it's the suitable end (color) or end field coordinates - not decided yet.
+ */
+Stream.prototype.isInStreamEnd = function(){
+    if((this.XEnd%2 == 1) && (this.YEnd%2 == 1))
+        return true;
+    return false;
 }
