@@ -20,7 +20,7 @@ function play(){
     pipeGrid = new PipeGrid(boardCanvas);
     pipeGrid.createNodes();
 
-    initStreams(2);
+    initStreams(1);
 }
 
 function setGameState(gameState){

@@ -26,6 +26,12 @@ PipeGrid.prototype.getNeighbours = function(X, Y){
     return this.nodes[position.X][position.Y];
 }
 
+PipeGrid.prototype.lockNode = function(X, Y){
+    var arrayCoor = this.arrayIndexesFromNodes(X, Y);
+    this.nodes[arrayCoor.X][arrayCoor.Y][0] = null;
+    this.nodes[arrayCoor.X][arrayCoor.Y][1] = null;
+}
+
 /* Returns position in nodes array of node with coordinates X, Y */
 PipeGrid.prototype.arrayIndexesFromNodes = function(X, Y){
     return new Node(X, Math.floor(Y/2));

@@ -39,9 +39,10 @@ Stream.prototype.changeField = function(){
             if(XN != this.XBeg || YN != this.YBeg){
                 this.updateCoordinates(XN, YN);
                 var fieldNode = board.getFieldFromGridEdges(this.XBeg, this.YBeg, XN, YN);
+                alert("Locking field X = " + fieldNode.X + ", Y = " + fieldNode.Y);
                 board.setFieldState(fieldNode, 1);
                 //modifyConnections(fieldNode, 1);
-                //lockNode(this.XBeg, this.YBeg);
+                pipeGrid.lockNode(this.XBeg, this.YBeg);
 
                 if(this.isInStreamEnd()){
                     var index = streams.indexOf(this);

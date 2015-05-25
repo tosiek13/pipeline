@@ -51,6 +51,8 @@ Board.prototype.paintBoard = function(){
 Board.prototype.setFieldState = function(field, code){
     //Setting field code - to unable modifying it when it was already flooded by stream.
     this.fields[field.Y][field.X].code = code;
+    //Null-ing neighbours, to prevent other streams from swam into other stream.
+    this.fields[field.Y][field.X]
 }
 
 Board.prototype.createFields = function(){
@@ -75,15 +77,25 @@ Board.prototype.getFieldWidth = function(){
 Board.prototype.getFieldFromGridEdges = function(XBeg, YBeg, XEnd, YEnd){
     var XGrid;
     var YGrid;
-    if( XBeg%2 == 1){
-        XGrid = XBeg;
+    if( XBeg == XEnd || (YBeg == YEnd)){
+        alert("lock in horizontal.");
+        if(XBeg == XEnd){
+            XGrid = XBeg;
+            YGrid = YBeg + 1;
+        }else{
+            XGrid = XBeg + 1;
+            YGrid = YBeg;
+        }
     }else{
-        XGrid = XEnd;
-    }
-    if( YBeg%2 == 1){
-        YGrid = YBeg;
-    }else{
-        YGrid = YEnd;
+        if( XBeg%2 == 1){
+            XGrid = XBeg;
+        }else{
+            XGrid = XEnd;
+        }if( YBeg%2 == 1){
+            YGrid = YBeg;
+        }else{
+            YGrid = YEnd;
+        }
     }
 
     return gridToField(XGrid, YGrid)
