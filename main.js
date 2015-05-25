@@ -70,5 +70,5 @@ function setButtons(){
 
 function restart(){
     if (confirm("Are you sure you want to restart game !!"))
-        play();
+        location.reload();
 }
