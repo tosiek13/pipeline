@@ -32,13 +32,16 @@ Stream.prototype.changeField = function(){
 
     for(i = 0; i<2; i++){
         if (neighbours[i] != null){
+            alert("Check not null neighbour + " + i);
             var XN = neighbours[i].X;
             var YN = neighbours[i].Y;
+            alert("Neighbour X = " + XN + ", Y = " + YN);
             if(XN != this.XBeg || YN != this.YBeg){
                 this.updateCoordinates(XN, YN);
                 var fieldNode = board.getFieldFromGridEdges(this.XBeg, this.YBeg, XN, YN);
                 board.setFieldState(fieldNode, 1);
-                modifyConnections(fieldNode, 1);
+                //modifyConnections(fieldNode, 1);
+                //lockNode(this.XBeg, this.YBeg);
 
                 if(this.isInStreamEnd()){
                     var index = streams.indexOf(this);
