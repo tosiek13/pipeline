@@ -35,7 +35,10 @@ Stream.prototype.animate = function(){
 Stream.prototype.changeField = function(){
     var neighbours = pipeGrid.getNeighbours(this.XEnd, this.YEnd);
 
-    for(i = 0; i<2; i++){
+    if( this.isInStreamEnd() ){
+        return;
+    }
+    for(var i = 0; i<2; i++){
         if (neighbours[i] != null){
             //alert("Check not null neighbour + " + i);
             var XN = neighbours[i].X;
@@ -50,9 +53,10 @@ Stream.prototype.changeField = function(){
                 pipeGrid.lockNode(this.XBeg, this.YBeg);
 
                 if(this.isInStreamEnd()){
+                    alert("End reached!");
                     var index = streams.indexOf(this);
                     if (index > -1) {
-                        //alert("DEleteing stream with indeax = " + index);
+                        alert("DEleteing stream with indeax = " + index);
                         streams.splice(index, 1);
                         checkEndOfGameConditions();
                     }
@@ -146,5 +150,18 @@ Stream.prototype.isInStreamEnd = function(){
 
 /* Używane do przyśpiesenia strumieni. */
 Stream.prototype.modifyPace = function(times){
+    var toEndTime = (1 - this.animator.percent) * (this.animator.allFrames * this.animator.interval) / times;
     this.animator.pace = this.animator.pace * times;
+    this.fieldTime = fieldTime / times;
+    setTimeout(endAnimate, toEndTime, this);
+}
+
+
+function endAnimate(stream){
+    if(gameFlag){
+        stream.changeField();
+        setTimeout(nextAnimationCaller, stream.fieldTime, stream);
+        stream.cratePath();
+        stream.animator = new Animation(stream.canvas, stream.path, stream.fieldTime, 30, stream);
+    }
 }

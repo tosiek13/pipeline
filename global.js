@@ -8,7 +8,7 @@ var blocksAmount = 6;
 var colors = ['blue', 'green', 'red', 'grey', 'orange', 'purple', 'black', 'pink'];
 
 /* Ustawienie wymiarów planczy - liczba pól na szerokość i w pionie. */
-var boardWidth = 20;
+var boardWidth = 10;
 var boardHeight = Math.floor(boardWidth * 10 / 16);
 
 /* Ustawienie szerokości planczy - stała, a wysokośc dopasowuje się tak, żeby pola były kwadratowe. */
