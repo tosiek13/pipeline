@@ -32,14 +32,14 @@ Stream.prototype.changeField = function(){
 
     for(i = 0; i<2; i++){
         if (neighbours[i] != null){
-            alert("Check not null neighbour + " + i);
+            //alert("Check not null neighbour + " + i);
             var XN = neighbours[i].X;
             var YN = neighbours[i].Y;
-            alert("Neighbour X = " + XN + ", Y = " + YN);
+            //alert("Neighbour X = " + XN + ", Y = " + YN);
             if(XN != this.XBeg || YN != this.YBeg){
                 this.updateCoordinates(XN, YN);
                 var fieldNode = board.getFieldFromGridEdges(this.XBeg, this.YBeg, XN, YN);
-                alert("Locking field X = " + fieldNode.X + ", Y = " + fieldNode.Y);
+                //alert("Locking field X = " + fieldNode.X + ", Y = " + fieldNode.Y);
                 board.setFieldState(fieldNode, 1);
                 //modifyConnections(fieldNode, 1);
                 pipeGrid.lockNode(this.XBeg, this.YBeg);
@@ -47,7 +47,7 @@ Stream.prototype.changeField = function(){
                 if(this.isInStreamEnd()){
                     var index = streams.indexOf(this);
                     if (index > -1) {
-                        alert("DEleteing stream with indeax = " + index);
+                        //alert("DEleteing stream with indeax = " + index);
                         streams.splice(index, 1);
                         checkEndOfGameConditions();
                     }

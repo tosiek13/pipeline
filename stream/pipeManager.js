@@ -20,7 +20,7 @@ function modifyConnections(field, code){
 	switch(code){
 		/*For flood field*/
 		case 1:
-			alert("Lock on filed X = " + field.X + " Y = " + field.Y);
+			//alert("Lock on filed X = " + field.X + " Y = " + field.Y);
 			pipeGrid.nodes[x - 1][y][1] = null;
 			pipeGrid.nodes[x][y][1] = null;
 			pipeGrid.nodes[x + 1][y][0] = null;
