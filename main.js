@@ -56,7 +56,7 @@ function checkEndOfGameConditions(){
 function speedUp(){
     alert("speedUp");
     for(var i = 0; i<streams.length; i++){
-        streams[i].modifyPace(500);
+        streams[i].modifyPace(5);
     }
 }
 

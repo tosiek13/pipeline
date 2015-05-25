@@ -16,6 +16,8 @@ function Stream(begNode, direcionNode, endNode, color, width, startTime, fieldTi
     this.fieldTime = fieldTime;
 
     this.canvas = document.getElementById("board");
+    this.pace = 1;
+    this.animator;
 
     /////////////////////////////////////////////////////////////////////////////Zajmi się tworzeniem path;
     this.path;
@@ -26,7 +28,7 @@ Stream.prototype.animate = function(){
         this.changeField();
         setTimeout(nextAnimationCaller, this.fieldTime, this);
         this.cratePath();
-        new Animation(this.canvas, this.path, this.fieldTime, 30, this);
+        this.animator = new Animation(this.canvas, this.path, this.fieldTime, 30, this);
     }
 }
 
@@ -94,7 +96,7 @@ Stream.prototype.init = function(){
     var line = new Line(x, y, xDiff, yDiff, this.color, this.width);
 
     setTimeout(nextAnimationCaller, this.startTime, this);
-    new Animation(this.canvas, line, this.startTime, 30, this);
+    this.animator = new Animation(this.canvas, line, this.startTime, 30, this);
 }
 
 Stream.prototype.cratePath = function(){
@@ -143,6 +145,6 @@ Stream.prototype.isInStreamEnd = function(){
 }
 
 /* Używane do przyśpiesenia strumieni. */
-Stream.prototype.modifyPace = function(fieldTime){
-    this.fieldTime = fieldTime;
+Stream.prototype.modifyPace = function(times){
+    this.animator.pace = this.animator.pace * times;
 }

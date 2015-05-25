@@ -29,7 +29,7 @@ Line.prototype.draw = function(self, animator) {
         animator.ctx.lineWidth = self.width;
         animator.ctx.strokeStyle = self.color;
         animator.ctx.stroke();
-        animator.percent += animator.step;
+        animator.percent += (animator.step * animator.pace);
     }else{
         animator.endPainting(animator);
     }
@@ -61,7 +61,7 @@ Arc.prototype.draw = function(self, animator){
         animator.ctx.lineWidth = self.width;
         animator.ctx.strokeStyle = self.color;
         animator.ctx.stroke();
-        animator.percent += animator.step;
+        animator.percent += (animator.step * animator.pace);
     }else{
         animator.endPainting(animator);
     }
@@ -135,6 +135,7 @@ function Animation(canvas, toAnimate, time_ms, fps, stream){
     this.percent = 0;  
     this.stream = stream;                       //Wartość (0,1] - postęp animacji w kolejnych krokach
     this.interClear = setInterval(toAnimate.draw, this.interval, this.toAnimate, this);
+    this.pace = 1;
 }
 
 Animation.prototype.endPainting = function(obj) {
