@@ -1,5 +1,5 @@
 /*Powoduje zainicjowanie strumieni*/
-function initStreams(amount){
+function initStreams(amount, startTime_ms, fieldTime_ms){
 	streams = [];
 	var ID = 0;
 
@@ -26,7 +26,7 @@ function initStreams(amount){
 		var endDirection = generateDirectionCoordinates(endGrid);
 
 				//Upewni się, że endGeig to end Grid - centrum pola 
-		var stream = new Stream(begGrid, begDirection[0], endGrid, colors[ID++%colors.length], fieldSize * 25/100);
+		var stream = new Stream(begGrid, begDirection[0], endGrid, colors[ID++%colors.length], fieldSize * 25/100, startTime_ms, fieldTime_ms);
 		streams.push(stream);
 		
 		//SETTING BOARD STATE

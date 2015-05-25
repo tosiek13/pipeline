@@ -1,5 +1,5 @@
 /*  */
-function Stream(begNode, direcionNode, endNode, color, width){
+function Stream(begNode, direcionNode, endNode, color, width, startTime, fieldTime){
     this.XBeg = begNode.X;
     this.YBeg = begNode.Y;
     this.XEnd = direcionNode.X;
@@ -12,6 +12,9 @@ function Stream(begNode, direcionNode, endNode, color, width){
     this.color = color;
     this.width = width;
 
+    this.startTime = startTime;
+    this.fieldTime = fieldTime;
+
     this.canvas = document.getElementById("board");
 
     /////////////////////////////////////////////////////////////////////////////Zajmi się tworzeniem path;
@@ -21,9 +24,9 @@ function Stream(begNode, direcionNode, endNode, color, width){
 Stream.prototype.animate = function(){
     if(gameFlag){
         this.changeField();
-        setTimeout(nextAnimationCaller, 3000, this);
+        setTimeout(nextAnimationCaller, this.fieldTime, this);
         this.cratePath();
-        new Animation(this.canvas, this.path, 3000, 30, this);
+        new Animation(this.canvas, this.path, this.fieldTime, 30, this);
     }
 }
 
@@ -79,8 +82,8 @@ Stream.prototype.init = function(){
 
     var line = new Line(x, y, xDiff, yDiff, this.color, this.width);
 
-    setTimeout(nextAnimationCaller, 15000, this);
-    new Animation(this.canvas, line, 15000, 30, this);
+    setTimeout(nextAnimationCaller, this.startTime, this);
+    new Animation(this.canvas, line, this.startTime, 30, this);
 }
 
 Stream.prototype.cratePath = function(){
@@ -123,4 +126,9 @@ Stream.prototype.isInStreamEnd = function(){
     if((this.XEnd%2 == 1) && (this.YEnd%2 == 1))
         return true;
     return false;
+}
+
+/* Używane do przyśpiesenia strumieni. */
+Stream.prototype.modifyPace = function(fieldTime){
+    this.fieldTime = fieldTime;
 }

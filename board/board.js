@@ -78,7 +78,7 @@ Board.prototype.getFieldFromGridEdges = function(XBeg, YBeg, XEnd, YEnd){
     var XGrid;
     var YGrid;
     if( XBeg == XEnd || (YBeg == YEnd)){
-        alert("lock in horizontal.");
+        //alert("lock in horizontal.");
         if(XBeg == XEnd){
             XGrid = XBeg;
             YGrid = YBeg + 1;

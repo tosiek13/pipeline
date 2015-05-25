@@ -9,6 +9,7 @@ function initGame(){
 
     setTimeout(play, 500);
 
+    setButtons();
 }
 
 function play(){
@@ -20,7 +21,7 @@ function play(){
     pipeGrid = new PipeGrid(boardCanvas);
     pipeGrid.createNodes();
 
-    initStreams(3);
+    initStreams(1, 5000, 20000);
 }
 
 function setGameState(gameState){
@@ -45,4 +46,16 @@ function checkEndOfGameConditions(){
     if(streams.length == 0){
         setGameState(1);
     }
+}
+
+
+function speedUp(){
+    for(var i = 0; i<streams.length; i++){
+        streams[i].modifyPace(500);
+    }
+}
+
+function setButtons(){
+    var speedButton = document.getElementById("restartButton");
+    speedButton.addEventListener("click", speedUp);
 }
