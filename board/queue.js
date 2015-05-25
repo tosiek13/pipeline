@@ -6,15 +6,15 @@
 * This object facilitates all necessary methods,
 * including printing himself.
 */
-function Queue(canvas, size, fieldHeight, fieldWidth){
+function Queue(canvas, size){
 	this.canvas = canvas;				
 	this.size = size;
-	this.width = size * fieldWidth; 	//szerokość płótna w px
-	this.height = fieldHeight; 		//wysokość płótna w px
+	//this.width = size * fieldWidth; 	//szerokość płótna w px
+	//this.height = fieldHeight; 		//wysokość płótna w px
 	this.array = new Array();			//Holds codes of blocks in queue
 	//Seting canvas size
-	canvas.width = this.width;			
-	canvas.height =this.height;
+	canvas.width = size * queueFieldSize;	
+	canvas.height = queueFieldSize;
 }
 
 //Initialization method
@@ -41,7 +41,7 @@ Queue.prototype.spyQueue = function(){
 /*Prints current buffer content on canvas*/
 Queue.prototype.printBuffer = function(){
 	for(var i  = 0;i<this.size; i++){
-		this.canvas.getContext("2d").drawImage(images.getImage(this.array[i]) , i * fieldSize , 0, fieldSize, this.height);
+		this.canvas.getContext("2d").drawImage(images.getImage(this.array[i]) , i * queueFieldSize , 0, queueFieldSize, queueFieldSize);
 	}
 }
  

@@ -43,7 +43,6 @@ function getField(e) {
     y -= boardCanvas.offsetTop;
     x = Math.min(x, boardCanvas.width);
     y = Math.min(y, boardCanvas.height);
- 
-    //alert("x = " + x + ", y = " + y);
-    return new Field(Math.floor(y/board.getFieldHeight()), Math.floor(x/board.getFieldWidth()));
+    
+    return new Field(Math.floor(y/fieldSize), Math.floor(x/fieldSize));
 }

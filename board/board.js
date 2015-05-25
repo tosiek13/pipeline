@@ -44,6 +44,7 @@ Board.prototype.paintBoard = function(){
     }
  
     //Painting on canvas
+    this.ctx.lineWidth = 1;
     this.ctx.strokeStyle = "green";
     this.ctx.stroke();
 }

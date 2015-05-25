@@ -74,10 +74,21 @@ Stream.prototype.init = function(){
 
     var ctx = boardCanvas.getContext("2d");
     ctx.beginPath();
-    ctx.arc(x, y, fieldSize * 0.15, 0, 2 * Math.PI);
+    ctx.arc(x, y, fieldSize * 0.25, 0, 2 * Math.PI);
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.strokeStyle = this.color;
+    ctx.stroke();
+
+    //Creating Point at the stream end
+        //counting coordinates in pixels
+    var xStop = this.XStop / 2 * board.getFieldWidth();
+    var yStop = this.YStop / 2 * board.getFieldHeight();
+
+    ctx.beginPath();
+    ctx.arc(xStop, yStop, fieldSize * 0.15, 0, 2 * Math.PI);
+    ctx.fillStyle = this.color;
+    ctx.fill();
     ctx.stroke();
 
     var line = new Line(x, y, xDiff, yDiff, this.color, this.width);
@@ -123,9 +134,12 @@ function getFieldFromCoordinates(x, y) {
 ** if so, checks weather it's the suitable end (color) or end field coordinates - not decided yet.
  */
 Stream.prototype.isInStreamEnd = function(){
-    if((this.XEnd%2 == 1) && (this.YEnd%2 == 1))
+    if((this.XEnd == this.XStop) && (this.YEnd == this.YStop))
         return true;
     return false;
+    /*if((this.XEnd%2 == 1) && (this.YEnd%2 == 1))
+        return true;
+    return false;*/
 }
 
 /* Używane do przyśpiesenia strumieni. */

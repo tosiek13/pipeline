@@ -5,19 +5,21 @@ var queueCanvas = document.getElementById("queue");
 var blocksAmount = 6;
 
 /* Colors of fluid */
-var colors = ['blue', 'green', 'red'];
+var colors = ['blue', 'green', 'red', 'grey', 'orange', 'purple', 'black', 'pink'];
 
 /* Ustawienie wymiarów planczy - liczba pól na szerokość i w pionie. */
-var boardWidth = 8;
-var boardHeight = 6;
+var boardWidth = 20;
+var boardHeight = Math.floor(boardWidth * 10 / 16);
 
 /* Ustawienie szerokości planczy - stała, a wysokośc dopasowuje się tak, żeby pola były kwadratowe. */
-boardCanvas.width = 800;			
+var boardContainer = document.getElementById("boardContainer");
+boardCanvas.width = boardContainer.clientWidth * 0.8;		
 boardCanvas.height = boardCanvas.width * boardHeight / boardWidth;
 /* Wyższe ustawienia determinują wielkość kwadratowego bloczka (pola) */
 var fieldSize = boardCanvas.width / boardWidth;
 
-queueCanvas.width = 5 * fieldSize;
-queueCanvas.height = fieldSize;
+var queueFieldSize = boardCanvas.width * 0.1;
+queueCanvas.width = 5 * queueFieldSize;
+queueCanvas.height = queueFieldSize;
 
 var gameFlag = true;

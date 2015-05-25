@@ -2,13 +2,75 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <style type="text/css">
+            div.board{ 
+                margin-left: auto;
+                margin-right: auto;
+                padding-top: 2%;
+                width: 60%;  
+                background-color: #339933; 
+            }
+            div.queue{ 
+                margin-left: auto;
+                margin-right: auto;
+                padding-top: 0.5%;
+                width: 60%;  
+                background-color: #339933; 
+            }
+            head{
+                display:block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 60%;  
+                background-color: #AEAE99; 
+            }
+
+            nav{
+                position: absolute;
+                padding-top: 1%;
+                width: 19%;
+                background-color: #AEAE99; 
+            }
+
+            img.image{
+                max-width:90%;
+                margin-left: 2%;
+                margin-top: 5%;
+                margin-bottom: 2%;
+                clear: both;
+            }
+
+            description{
+                display:block;
+                padding-bottom: 5%;
+            }
+
+            button{
+                padding: 3px;
+            }
+
+        </style>
     </head>
     <body onload="initGame()">
-        <div id = "buttons">
-            <button id = "restartButton">RestartGame</button>
+        <head>
+                HEAD
+        </head>
+        <nav>
+            PLUMBER
+            <img class="image" src="pipeMan.jpg" alt="Projekt na TI, cośnie tak ze zdięciem."/>
+            <description>
+                Reflex & smartness.
+            </descriprion>
+        </nav>
+        <div id = "boardContainer" class="board">
+            <canvas id="board"> Your browser does not support the HTML5 canvas tag. </canvas>
         <div>
-        <canvas id="board"> Your browser does not support the HTML5 canvas tag. </canvas>
-        <canvas id="queue" width="200" height="30"> </canvas>
+        <div class="queue">
+            <canvas id="queue" width="200" height="30"> </canvas>
+        </div>
+
+        <button id = "speedUp">Speed Up</button>
+        <button id = "restarGame">Restart</button>
 
         <script type="text/javascript" src="global.js"></script>
         <script type="text/javascript" src="prepare.js"></script>
